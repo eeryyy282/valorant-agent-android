@@ -3,4 +3,6 @@
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
+    <string name="valorant_agent">Valorant Agent</string>
+    <string name="valorant_icon_image">Valorant Icon Image</string>
 </resources>
