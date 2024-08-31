@@ -1,4 +1,4 @@
-package com.submission.valorantagentandroid.ui.favorite
+package com.submission.valorantagentandroid.presentation.favorite
 
 import android.os.Bundle
 import android.view.LayoutInflater

@@ -1,4 +1,4 @@
-package com.submission.valorantagentandroid
+package com.submission.valorantagentandroid.presentation
 
 import android.annotation.SuppressLint
 import android.content.Intent
@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.submission.valorantagentandroid.R
 import com.submission.valorantagentandroid.databinding.ActivitySplashScreenBinding
 
 @SuppressLint("CustomSplashScreen")
