@@ -7,4 +7,12 @@
     <string name="valorant_icon_image">Valorant Icon Image</string>
     <string name="title_favorite">Favorite</string>
     <string name="title_settings">Settings</string>
+    <string name="hi_n_nfind_your_favorite_agent">Hi!\n\nFind your favorite agent</string>
+    <string name="search_for_agent">Search for agent...</string>
+    <string name="find_your_favorite_agent_and_show_the_world_what_you_re_made_of">Find your favorite agent and show the world what you\'re made of!</string>
+    <string name="show_all"><![CDATA[Show All >>]]></string>
+    <string name="agent_in_card_view">Agent in card view</string>
+    <string name="top_agent">Top Agent</string>
+    <string name="news">News</string>
+    <string name="logo_valorant_home">logo valorant home</string>
 </resources>
