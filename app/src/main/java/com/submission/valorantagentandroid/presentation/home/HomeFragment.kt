@@ -7,6 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.navigation.NavOptions
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.submission.valorantagentandroid.R
 import com.submission.valorantagentandroid.core.data.Resource
@@ -34,26 +36,64 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         checkDarkMode()
         recyclerViewAgent()
+        setupAction()
+    }
+
+    private fun setupAction() {
+        val navOptions = NavOptions.Builder()
+            .setPopUpTo(R.id.navigation_home, true)
+            .build()
+
+        binding.buttonHomeToAgent.setOnClickListener {
+            findNavController().navigate(
+                R.id.action_navigation_home_to_navigation_agent,
+                null,
+                navOptions
+            )
+        }
+
+        binding.buttonShowAllAgentHome.setOnClickListener {
+            findNavController().navigate(
+                R.id.action_navigation_home_to_navigation_agent,
+                null,
+                navOptions
+            )
+        }
     }
 
 
     private fun checkDarkMode() {
         val isDarkModeActive =
             (resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK == Configuration.UI_MODE_NIGHT_YES)
-        if (isDarkModeActive) {
-            binding.ivLogoHome.setColorFilter(
-                ContextCompat.getColor(
-                    this.requireContext(),
-                    R.color.white
+        with(binding) {
+            if (isDarkModeActive) {
+                ivLogoHome.setColorFilter(
+                    ContextCompat.getColor(
+                        requireContext(),
+                        R.color.white
+                    )
                 )
-            )
-        } else {
-            binding.ivLogoHome.setColorFilter(
-                ContextCompat.getColor(
-                    this.requireContext(),
-                    R.color.black
+
+                buttonHomeToAgent.setTextColor(
+                    ContextCompat.getColor(
+                        requireContext(),
+                        R.color.white
+                    )
                 )
-            )
+            } else {
+                ivLogoHome.setColorFilter(
+                    ContextCompat.getColor(
+                        requireContext(),
+                        R.color.black
+                    )
+                )
+                buttonHomeToAgent.setTextColor(
+                    ContextCompat.getColor(
+                        requireContext(),
+                        R.color.black
+                    )
+                )
+            }
         }
     }
 
