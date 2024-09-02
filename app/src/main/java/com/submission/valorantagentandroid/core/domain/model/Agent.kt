@@ -13,5 +13,6 @@ data class Agent(
     val fullPortrait: String?,
     val background: String?,
     val backgroundGradientColors: List<String?>?,
+    val isPlayableCharacter: Boolean?,
     val isFavorite: Boolean
 ) : Parcelable

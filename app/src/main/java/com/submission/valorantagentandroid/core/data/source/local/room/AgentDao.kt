@@ -10,7 +10,7 @@ import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface AgentDao {
-    @Query("SELECT * FROM agent")
+    @Query("SELECT * FROM agent WHERE isPlayableCharacter = 1")
     fun getAllAgent(): Flow<List<AgentEntity>>
 
     @Query("SELECT * FROM agent where isFavorite = 1")

@@ -24,7 +24,7 @@ class AgentRepository(
                 }
             }
 
-            override fun shouldFetch(data: List<Agent>?): Boolean = false
+            override fun shouldFetch(data: List<Agent>?): Boolean = true
 
             override suspend fun createCall(): Flow<ApiResponse<List<AgentResponse>>> =
                 remoteDataSource.getAllAgent()

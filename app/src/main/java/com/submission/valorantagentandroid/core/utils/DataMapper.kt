@@ -17,6 +17,7 @@ object DataMapper {
                 isFavorite = false,
                 uuid = it.uuid,
                 developerName = it.developerName,
+                isPlayableCharacter = it.isPlayableCharacter,
                 backgroundGradientColors = it.backgroundGradientColors
             )
             agentList.add(agent)
@@ -35,6 +36,7 @@ object DataMapper {
                 fullPortrait = it.fullPortrait,
                 developerName = it.developerName,
                 backgroundGradientColors = it.backgroundGradientColors,
+                isPlayableCharacter = it.isPlayableCharacter,
                 isFavorite = it.isFavorite,
 
                 )
@@ -50,6 +52,7 @@ object DataMapper {
             fullPortrait = input.fullPortrait,
             developerName = input.developerName,
             backgroundGradientColors = input.backgroundGradientColors,
+            isPlayableCharacter = input.isPlayableCharacter,
             isFavorite = input.isFavorite,
         )
 

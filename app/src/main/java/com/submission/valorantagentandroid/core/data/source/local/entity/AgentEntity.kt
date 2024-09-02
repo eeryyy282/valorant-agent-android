@@ -32,6 +32,9 @@ data class AgentEntity(
     @ColumnInfo(name = "background")
     var background: String?,
 
+    @ColumnInfo(name = "isPlayableCharacter")
+    var isPlayableCharacter: Boolean?,
+
     @ColumnInfo(name = "isFavorite")
     var isFavorite: Boolean = false
 )
