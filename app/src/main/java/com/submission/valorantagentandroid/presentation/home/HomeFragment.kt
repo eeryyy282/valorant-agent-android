@@ -106,25 +106,38 @@ class HomeFragment : Fragment() {
 
             homeViewModel.agent.observe(viewLifecycleOwner) { agent ->
                 if (agent != null) {
-                    when (agent) {
-                        is Resource.Error -> {
-                            binding.progressBarTopAgent.visibility = View.GONE
-                        }
+                    with(binding) {
+                        when (agent) {
+                            is Resource.Error -> {
+                                progressBarTopAgent.visibility = View.GONE
+                                ivErrorTopAgentHome.visibility = View.VISIBLE
+                                tvErrorTopAgentMessageHome.visibility = View.VISIBLE
 
-                        is Resource.Loading -> binding.progressBarTopAgent.visibility = View.VISIBLE
+                            }
 
-                        is Resource.Success -> {
-                            binding.progressBarTopAgent.visibility = View.GONE
-                            agentAdapter.setData(agent.data)
+                            is Resource.Loading -> {
+                                progressBarTopAgent.visibility = View.VISIBLE
+                                ivErrorTopAgentHome.visibility = View.GONE
+                                tvErrorTopAgentMessageHome.visibility = View.GONE
+
+                            }
+
+                            is Resource.Success -> {
+                                progressBarTopAgent.visibility = View.GONE
+                                ivErrorTopAgentHome.visibility = View.GONE
+                                tvErrorTopAgentMessageHome.visibility = View.GONE
+                                agentAdapter.setData(agent.data)
+                            }
                         }
                     }
                 }
-            }
 
-            with(binding.rvTopAgentHome) {
-                layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-                setHasFixedSize(true)
-                adapter = agentAdapter
+                with(binding.rvTopAgentHome) {
+                    layoutManager =
+                        LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+                    setHasFixedSize(true)
+                    adapter = agentAdapter
+                }
             }
         }
     }

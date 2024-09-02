@@ -129,7 +129,7 @@
             android:layout_marginTop="16dp"
             android:background="@android:color/transparent"
             android:fontFamily="@font/ff_mark_medium"
-            android:text="Show More >> "
+            android:text="@string/show_more"
             android:textAlignment="viewEnd"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
@@ -186,6 +186,62 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             app:layout_constraintGuide_begin="671dp" />
+
+        <ImageView
+            android:id="@+id/iv_error_top_agent_home"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginTop="24dp"
+            android:contentDescription="@string/image_error_message"
+            android:src="@drawable/sad_error_agent"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_top_agent_home" />
+
+
+        <TextView
+            android:id="@+id/tv_error_top_agent_message_home"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="32dp"
+            android:fontFamily="@font/poppins_medium"
+            android:text="@string/sorry_there_seems_to_be_an_error_try_again_later"
+            android:textAlignment="center"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="@+id/cv_home"
+            app:layout_constraintStart_toStartOf="@+id/tv_top_agent_home"
+            app:layout_constraintTop_toBottomOf="@+id/iv_error_top_agent_home" />
+
+        <ImageView
+            android:id="@+id/iv_error_news_home"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginTop="24dp"
+            android:contentDescription="@string/image_error_message"
+            android:src="@drawable/sad_error_agent"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_news_home" />
+
+
+        <TextView
+            android:id="@+id/tv_error_newsmessage_home"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="32dp"
+            android:fontFamily="@font/poppins_medium"
+            android:text="@string/sorry_there_seems_to_be_an_error_try_again_later"
+            android:textAlignment="center"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="@+id/cv_home"
+            app:layout_constraintStart_toStartOf="@+id/tv_top_agent_home"
+            app:layout_constraintTop_toBottomOf="@+id/iv_error_news_home" />
+
 
         <ProgressBar
             android:id="@+id/progress_bar_top_agent"
