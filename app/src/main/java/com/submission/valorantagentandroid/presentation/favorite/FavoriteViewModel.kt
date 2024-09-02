@@ -1,13 +1,9 @@
 package com.submission.valorantagentandroid.presentation.favorite
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.asLiveData
+import com.submission.valorantagentandroid.core.domain.usecase.AgentUseCase
 
-class FavoriteViewModel : ViewModel() {
-
-    private val _text = MutableLiveData<String>().apply {
-        value = "This is dashboard Fragment"
-    }
-    val text: LiveData<String> = _text
+class FavoriteViewModel(agentUseCase: AgentUseCase) : ViewModel() {
+    val favoriteAgent = agentUseCase.getFavoriteAgent().asLiveData()
 }
