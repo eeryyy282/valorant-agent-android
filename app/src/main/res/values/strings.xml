@@ -28,4 +28,6 @@
     <string name="banner_favorite_agent">Banner favorite agent</string>
     <string name="you_don_t_have_a_favorite_agent_yet">You don\'t have a favorite agent yet.</string>
     <string name="favorite_agent_n_nyour_favorite_agent_your_choice">Favorite Agent.\n\nYour favorite agent, your choice</string>
+    <string name="remove_favorite">Remove Favorite</string>
+    <string name="add_favorite">Add Favorite</string>
 </resources>

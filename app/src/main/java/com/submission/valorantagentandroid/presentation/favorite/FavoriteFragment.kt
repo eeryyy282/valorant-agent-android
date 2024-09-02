@@ -50,7 +50,6 @@ class FavoriteFragment : Fragment() {
 
             with(binding.rvFavoriteAgent) {
                 layoutManager = GridLayoutManager(context, 2)
-                setHasFixedSize(true)
                 adapter = agentAdapter
             }
         }

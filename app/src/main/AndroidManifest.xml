@@ -16,6 +16,9 @@
         android:theme="@style/Theme.Valorantagentandroid"
         tools:targetApi="31">
         <activity
+            android:name=".presentation.detail.DetailAgentActivity"
+            android:exported="false" />
+        <activity
             android:name=".presentation.SplashScreen"
             android:exported="true"
             android:theme="@style/Theme.Material3.DayNight.NoActionBar">

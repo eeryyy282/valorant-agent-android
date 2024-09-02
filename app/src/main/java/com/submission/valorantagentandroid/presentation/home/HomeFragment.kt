@@ -1,5 +1,6 @@
 package com.submission.valorantagentandroid.presentation.home
 
+import android.content.Intent
 import android.content.res.Configuration
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -14,6 +15,7 @@ import com.submission.valorantagentandroid.R
 import com.submission.valorantagentandroid.core.data.Resource
 import com.submission.valorantagentandroid.core.ui.AgentAdapter
 import com.submission.valorantagentandroid.databinding.FragmentHomeBinding
+import com.submission.valorantagentandroid.presentation.detail.DetailAgentActivity
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class HomeFragment : Fragment() {
@@ -100,8 +102,10 @@ class HomeFragment : Fragment() {
     private fun recyclerViewAgent() {
         if (activity != null) {
             val agentAdapter = AgentAdapter()
-            agentAdapter.onItemClick = {
-
+            agentAdapter.onItemClick = { selectedAgent ->
+                val intent = Intent(activity, DetailAgentActivity::class.java)
+                intent.putExtra(DetailAgentActivity.EXTRA_DATA, selectedAgent)
+                startActivity(intent)
             }
 
             homeViewModel.agent.observe(viewLifecycleOwner) { agent ->
@@ -135,7 +139,6 @@ class HomeFragment : Fragment() {
                 with(binding.rvTopAgentHome) {
                     layoutManager =
                         LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-                    setHasFixedSize(true)
                     adapter = agentAdapter
                 }
             }
