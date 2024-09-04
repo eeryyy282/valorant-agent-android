@@ -46,6 +46,12 @@ class AgentRepository(
         }
     }
 
+    override fun getRandomAgent(): Flow<List<Agent>> {
+        return localDataSource.getRandomAgent().map {
+            DataMapperAgent.mapEntitiesToDomain(it)
+        }
+    }
+
     override fun setFavoriteAgent(agent: Agent, state: Boolean) {
         val agentEntity = DataMapperAgent.mapDomainToEntity(agent)
         appExecutors.diskIO().execute {

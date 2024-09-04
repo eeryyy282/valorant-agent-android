@@ -9,5 +9,7 @@ interface IAgentRepository {
 
     fun getFavoriteAgent(): Flow<List<Agent>>
 
+    fun getRandomAgent(): Flow<List<Agent>>
+
     fun setFavoriteAgent(agent: Agent, state: Boolean)
 }

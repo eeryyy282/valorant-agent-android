@@ -16,6 +16,9 @@ interface AgentDao {
     @Query("SELECT * FROM agent where isFavorite = 1")
     fun getFavoriteAgent(): Flow<List<AgentEntity>>
 
+    @Query("SELECT * FROM agent WHERE isPlayableCharacter = 1 ORDER BY RANDOM() LIMIT 1")
+    fun getRandomAgent(): Flow<List<AgentEntity>>
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertAgent(agent: List<AgentEntity>)
 

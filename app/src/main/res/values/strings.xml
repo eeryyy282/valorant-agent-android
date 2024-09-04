@@ -27,7 +27,7 @@
     <string name="show_more"><![CDATA[Show More >>]]></string>
     <string name="banner_favorite_agent">Banner favorite agent</string>
     <string name="you_don_t_have_a_favorite_agent_yet">You don\'t have a favorite agent yet.</string>
-    <string name="favorite_agent_n_nyour_favorite_agent_your_choice">Favorite Agent.\n\nYour favorite agent, your choice</string>
+    <string name="favorite_agent_n_nyour_favorite_agent_your_choice">Favorite Agent.\n\nYour favorite agent, your choice.</string>
     <string name="remove_favorite">Remove Favorite</string>
     <string name="add_favorite">Add Favorite</string>
     <string name="developer_name">Developer Name</string>
@@ -35,4 +35,12 @@
     <string name="news_description">News Description</string>
     <string name="published">Published</string>
     <string name="image_news">Image news</string>
+    <string name="agent_decription">Agent decription</string>
+    <string name="agent_developer_name">Agent developer name</string>
+    <string name="agent_of_the_day">Agent of the day</string>
+    <string name="image_view_agent">Image view agent</string>
+    <string name="backgrouind_agent">Backgrouind agent</string>
+    <string name="background_agent_home">Background agent home</string>
+    <string name="get_started">Get Started</string>
+    <string name="_1_guide_for_you">#1 Guide for you.</string>
 </resources>

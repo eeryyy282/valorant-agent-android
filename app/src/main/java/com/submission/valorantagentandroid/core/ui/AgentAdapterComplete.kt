@@ -10,9 +10,9 @@ import com.submission.valorantagentandroid.R
 import com.submission.valorantagentandroid.core.domain.model.Agent
 import com.submission.valorantagentandroid.core.utils.BackgroundInsertorGradient.createGradientDrawable
 import com.submission.valorantagentandroid.databinding.ItemAgentBinding
+import com.submission.valorantagentandroid.databinding.ItemAgentCompleteBinding
 
-class AgentAdapter : RecyclerView.Adapter<AgentAdapter.ListViewHolder>() {
-
+class AgentAdapterComplete : RecyclerView.Adapter<AgentAdapterComplete.ListViewHolder>() {
     private var listData = ArrayList<Agent>()
     var onItemClick: ((Agent) -> Unit)? = null
 
@@ -24,13 +24,16 @@ class AgentAdapter : RecyclerView.Adapter<AgentAdapter.ListViewHolder>() {
         notifyDataSetChanged()
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AgentAdapter.ListViewHolder =
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        viewType: Int
+    ): AgentAdapterComplete.ListViewHolder =
         ListViewHolder(
-            LayoutInflater.from(parent.context).inflate(R.layout.item_agent, parent, false)
+            LayoutInflater.from(parent.context).inflate(R.layout.item_agent_complete, parent, false)
         )
 
 
-    override fun onBindViewHolder(holder: AgentAdapter.ListViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: AgentAdapterComplete.ListViewHolder, position: Int) {
         val data = listData[position]
         holder.bind(data)
     }
@@ -38,20 +41,21 @@ class AgentAdapter : RecyclerView.Adapter<AgentAdapter.ListViewHolder>() {
     override fun getItemCount() = listData.size
 
     inner class ListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private val binding = ItemAgentBinding.bind(itemView)
+        private val binding = ItemAgentCompleteBinding.bind(itemView)
         fun bind(data: Agent) {
             with(binding) {
                 Glide.with(itemView.context)
                     .load(data.background)
-                    .into(ivBackgroundAgent)
+                    .into(ivBackgroundAgent2)
                 Glide.with(itemView.context)
                     .load(data.fullPortrait)
-                    .into(ivAgent)
-                tvNameAgent.text = data.displayName
-                tvDescriptionAgent.text = data.description
+                    .into(ivAgent2)
+                tvAgentName2.text = data.displayName
+                tvDescritionAgent2.text = data.description
+                tvAgentDeveloper2.text = data.developerName
 
                 val gradientDrawable = createGradientDrawable(data.backgroundGradientColors)
-                cvItemAgent.background = gradientDrawable
+                cvAgentItem.background = gradientDrawable
             }
         }
 
@@ -62,8 +66,4 @@ class AgentAdapter : RecyclerView.Adapter<AgentAdapter.ListViewHolder>() {
             }
         }
     }
-
-
 }
-
-

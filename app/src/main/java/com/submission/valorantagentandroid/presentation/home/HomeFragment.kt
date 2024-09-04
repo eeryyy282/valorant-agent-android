@@ -9,13 +9,14 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
-import androidx.navigation.NavOptions
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.bumptech.glide.Glide
 import com.submission.valorantagentandroid.R
 import com.submission.valorantagentandroid.core.data.Resource
+import com.submission.valorantagentandroid.core.domain.model.Agent
 import com.submission.valorantagentandroid.core.ui.AgentAdapter
 import com.submission.valorantagentandroid.core.ui.NewsAdapter
+import com.submission.valorantagentandroid.core.utils.BackgroundInsertorGradient
 import com.submission.valorantagentandroid.databinding.FragmentHomeBinding
 import com.submission.valorantagentandroid.presentation.detail.DetailAgentActivity
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -41,30 +42,7 @@ class HomeFragment : Fragment() {
         checkDarkMode()
         recyclerViewAgent()
         recyclerViewNews()
-        setupAction()
-    }
 
-
-    private fun setupAction() {
-        val navOptions = NavOptions.Builder()
-            .setPopUpTo(R.id.navigation_home, true)
-            .build()
-
-        binding.buttonHomeToAgent.setOnClickListener {
-            findNavController().navigate(
-                R.id.action_navigation_home_to_navigation_agent,
-                null,
-                navOptions
-            )
-        }
-
-        binding.buttonShowAllAgentHome.setOnClickListener {
-            findNavController().navigate(
-                R.id.action_navigation_home_to_navigation_agent,
-                null,
-                navOptions
-            )
-        }
     }
 
 
@@ -79,21 +57,8 @@ class HomeFragment : Fragment() {
                         R.color.white
                     )
                 )
-
-                buttonHomeToAgent.setTextColor(
-                    ContextCompat.getColor(
-                        requireContext(),
-                        R.color.white
-                    )
-                )
             } else {
                 ivLogoHome.setColorFilter(
-                    ContextCompat.getColor(
-                        requireContext(),
-                        R.color.black
-                    )
-                )
-                buttonHomeToAgent.setTextColor(
                     ContextCompat.getColor(
                         requireContext(),
                         R.color.black
@@ -134,7 +99,24 @@ class HomeFragment : Fragment() {
                                 progressBarTopAgent.visibility = View.GONE
                                 ivErrorTopAgentHome.visibility = View.GONE
                                 tvErrorTopAgentMessageHome.visibility = View.GONE
-                                agentAdapter.setData(agent.data)
+
+                                val listDataAgent = agent.data
+                                agentAdapter.setData(listDataAgent)
+
+                                if (listDataAgent != null) {
+                                    Glide.with(this@HomeFragment)
+                                        .load(listDataAgent[2].fullPortrait)
+                                        .into(ivAgentHome)
+                                    Glide.with(this@HomeFragment)
+                                        .load(listDataAgent[2].background)
+                                        .into(ivAgentBackgroundHome)
+                                    val colorBackgroundGradient =
+                                        BackgroundInsertorGradient.createGradientDrawable(
+                                            listDataAgent[2].backgroundGradientColors
+                                        )
+                                    cvHome.background = colorBackgroundGradient
+                                }
+                                setupAction(listDataAgent?.get(2))
                             }
                         }
                     }
@@ -191,8 +173,19 @@ class HomeFragment : Fragment() {
                     adapter = newsAdapter
                 }
             }
+
+        }
+
+    }
+
+    private fun setupAction(agent: Agent?) {
+        binding.ivAgentHome.setOnClickListener {
+            val intent = Intent(activity, DetailAgentActivity::class.java)
+            intent.putExtra(DetailAgentActivity.EXTRA_DATA, agent)
+            startActivity(intent)
         }
     }
+
 
     override fun onDestroyView() {
         super.onDestroyView()

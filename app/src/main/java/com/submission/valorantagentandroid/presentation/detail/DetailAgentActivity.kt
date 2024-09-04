@@ -1,5 +1,6 @@
 package com.submission.valorantagentandroid.presentation.detail
 
+import android.annotation.SuppressLint
 import android.graphics.Color
 import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
@@ -93,6 +94,7 @@ class DetailAgentActivity : AppCompatActivity() {
         }
     }
 
+    @SuppressLint("ResourceAsColor")
     private fun setStatusFavorite(statusFavorite: Boolean?) {
         if (statusFavorite == true) {
             binding.buttonFavoriteDetail.let {

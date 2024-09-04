@@ -13,6 +13,8 @@ class LocalDataSource(private val agentDao: AgentDao, private val newsDao: NewsD
 
     fun getFavoriteAgent(): Flow<List<AgentEntity>> = agentDao.getFavoriteAgent()
 
+    fun getRandomAgent(): Flow<List<AgentEntity>> = agentDao.getRandomAgent()
+
     suspend fun insertAgent(agentList: List<AgentEntity>) = agentDao.insertAgent(agentList)
 
     fun setFavoriteAgent(agent: AgentEntity, newState: Boolean) {
