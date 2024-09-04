@@ -30,4 +30,9 @@
     <string name="favorite_agent_n_nyour_favorite_agent_your_choice">Favorite Agent.\n\nYour favorite agent, your choice</string>
     <string name="remove_favorite">Remove Favorite</string>
     <string name="add_favorite">Add Favorite</string>
+    <string name="developer_name">Developer Name</string>
+    <string name="news_title">News Title</string>
+    <string name="news_description">News Description</string>
+    <string name="published">Published</string>
+    <string name="image_news">Image news</string>
 </resources>

@@ -2,12 +2,17 @@ package com.submission.valorantagentandroid.core.di
 
 import androidx.room.Room
 import com.submission.valorantagentandroid.BuildConfig
-import com.submission.valorantagentandroid.core.data.AgentRepository
+import com.submission.valorantagentandroid.core.data.repository.AgentRepository
+import com.submission.valorantagentandroid.core.data.repository.NewsRepository
 import com.submission.valorantagentandroid.core.data.source.local.LocalDataSource
-import com.submission.valorantagentandroid.core.data.source.local.room.AgentDatabase
-import com.submission.valorantagentandroid.core.data.source.remote.RemoteDataSource
-import com.submission.valorantagentandroid.core.data.source.remote.network.ApiService
+import com.submission.valorantagentandroid.core.data.source.local.room.agent.AgentDatabase
+import com.submission.valorantagentandroid.core.data.source.local.room.news.NewsDatabase
+import com.submission.valorantagentandroid.core.data.source.remote.AgentRemoteDataSource
+import com.submission.valorantagentandroid.core.data.source.remote.NewsRemoteDataSource
+import com.submission.valorantagentandroid.core.data.source.remote.network.AgentApiService
+import com.submission.valorantagentandroid.core.data.source.remote.network.NewsApiService
 import com.submission.valorantagentandroid.core.domain.repository.IAgentRepository
+import com.submission.valorantagentandroid.core.domain.repository.INewsRepository
 import com.submission.valorantagentandroid.core.utils.AppExecutors
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -25,6 +30,14 @@ val databaseModule = module {
             AgentDatabase::class.java, "Agent.db"
         ).fallbackToDestructiveMigration().build()
     }
+
+    factory { get<NewsDatabase>().newsDao() }
+    single {
+        Room.databaseBuilder(
+            androidContext(),
+            NewsDatabase::class.java, "News.db"
+        ).fallbackToDestructiveMigration().build()
+    }
 }
 
 val networkModule = module {
@@ -35,20 +48,33 @@ val networkModule = module {
             .readTimeout(120, TimeUnit.SECONDS)
             .build()
     }
+
     single {
-        val retrofit = Retrofit.Builder()
+        Retrofit.Builder()
             .baseUrl(BuildConfig.BASE_URL_VALORANT_API)
             .addConverterFactory(GsonConverterFactory.create())
             .client(get())
             .build()
-        retrofit.create(ApiService::class.java)
+            .create(AgentApiService::class.java)
+    }
+
+    single {
+        Retrofit.Builder()
+            .baseUrl(BuildConfig.BASE_URL_NEWS_API)
+            .addConverterFactory(GsonConverterFactory.create())
+            .client(get())
+            .build()
+            .create(NewsApiService::class.java)
     }
 }
 
+
 val repositoryModule = module {
-    single { LocalDataSource(get()) }
-    single { RemoteDataSource(get()) }
+    single { LocalDataSource(get(), get()) }
+    single { AgentRemoteDataSource(get()) }
+    single { NewsRemoteDataSource(get()) }
     factory { AppExecutors() }
     single<IAgentRepository> { AgentRepository(get(), get(), get()) }
+    single<INewsRepository> { NewsRepository(get(), get()) }
 
 }

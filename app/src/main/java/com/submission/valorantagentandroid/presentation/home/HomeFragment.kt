@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
+import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
@@ -14,6 +15,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.submission.valorantagentandroid.R
 import com.submission.valorantagentandroid.core.data.Resource
 import com.submission.valorantagentandroid.core.ui.AgentAdapter
+import com.submission.valorantagentandroid.core.ui.NewsAdapter
 import com.submission.valorantagentandroid.databinding.FragmentHomeBinding
 import com.submission.valorantagentandroid.presentation.detail.DetailAgentActivity
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -38,8 +40,10 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         checkDarkMode()
         recyclerViewAgent()
+        recyclerViewNews()
         setupAction()
     }
+
 
     private fun setupAction() {
         val navOptions = NavOptions.Builder()
@@ -140,6 +144,51 @@ class HomeFragment : Fragment() {
                     layoutManager =
                         LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
                     adapter = agentAdapter
+                }
+            }
+        }
+    }
+
+    private fun recyclerViewNews() {
+        if (activity != null) {
+            val newsAdapter = NewsAdapter()
+            newsAdapter.onItemClick = { selectedNews ->
+                val intent = Intent(Intent.ACTION_VIEW)
+                intent.data = selectedNews.url?.toUri()
+                startActivity(intent)
+            }
+
+            homeViewModel.news.observe(viewLifecycleOwner) { news ->
+                if (news != null) {
+                    with(binding) {
+                        when (news) {
+                            is Resource.Error -> {
+                                progressBarNews.visibility = View.GONE
+                                ivErrorNewsHome.visibility = View.VISIBLE
+                                tvErrorNewsmessageHome.visibility = View.VISIBLE
+
+                            }
+
+                            is Resource.Loading -> {
+                                progressBarNews.visibility = View.VISIBLE
+                                ivErrorNewsHome.visibility = View.GONE
+                                tvErrorNewsmessageHome.visibility = View.GONE
+                            }
+
+                            is Resource.Success -> {
+                                progressBarNews.visibility = View.GONE
+                                ivErrorNewsHome.visibility = View.GONE
+                                tvErrorNewsmessageHome.visibility = View.GONE
+                                newsAdapter.setData(news.data)
+                            }
+                        }
+                    }
+                }
+
+                with(binding.rvNewsHome) {
+                    layoutManager =
+                        LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+                    adapter = newsAdapter
                 }
             }
         }

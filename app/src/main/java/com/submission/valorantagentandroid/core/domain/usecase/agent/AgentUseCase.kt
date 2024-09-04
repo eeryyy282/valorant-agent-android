@@ -1,4 +1,4 @@
-package com.submission.valorantagentandroid.core.domain.usecase
+package com.submission.valorantagentandroid.core.domain.usecase.agent
 
 import com.submission.valorantagentandroid.core.data.Resource
 import com.submission.valorantagentandroid.core.domain.model.Agent

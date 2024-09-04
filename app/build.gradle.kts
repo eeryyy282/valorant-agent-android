@@ -23,6 +23,18 @@ android {
             "BASE_URL_VALORANT_API",
             "\"https://valorant-api.com/v1/\""
         )
+
+        buildConfigField(
+            "String",
+            "BASE_URL_NEWS_API",
+            "\"https://newsapi.org/v2/\""
+        )
+
+        buildConfigField(
+            "String",
+            "API_KEY_NEWS_API",
+            "\"7b2e03697c0140789605db598c8898a6\""
+        )
     }
 
     buildTypes {

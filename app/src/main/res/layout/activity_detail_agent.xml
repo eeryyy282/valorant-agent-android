@@ -83,7 +83,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:fontFamily="@font/poppins_medium"
-                android:text="Developer Name"
+                android:text="@string/developer_name"
                 android:textAlignment="center"
                 app:layout_constraintEnd_toEndOf="@+id/tv_agent_name_detail"
                 app:layout_constraintStart_toStartOf="@+id/tv_agent_name_detail"

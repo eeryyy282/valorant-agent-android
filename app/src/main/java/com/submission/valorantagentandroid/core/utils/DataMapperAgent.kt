@@ -1,10 +1,10 @@
 package com.submission.valorantagentandroid.core.utils
 
 import com.submission.valorantagentandroid.core.data.source.local.entity.AgentEntity
-import com.submission.valorantagentandroid.core.data.source.remote.response.AgentResponse
+import com.submission.valorantagentandroid.core.data.source.remote.response.agent.AgentResponse
 import com.submission.valorantagentandroid.core.domain.model.Agent
 
-object DataMapper {
+object DataMapperAgent {
     fun mapResponseToEntities(input: List<AgentResponse>): List<AgentEntity> {
         val agentList = ArrayList<AgentEntity>()
         input.map {

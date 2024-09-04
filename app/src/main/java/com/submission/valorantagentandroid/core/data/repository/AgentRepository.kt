@@ -1,18 +1,20 @@
-package com.submission.valorantagentandroid.core.data
+package com.submission.valorantagentandroid.core.data.repository
 
+import com.submission.valorantagentandroid.core.data.NetworkBoundResource
+import com.submission.valorantagentandroid.core.data.Resource
 import com.submission.valorantagentandroid.core.data.source.local.LocalDataSource
-import com.submission.valorantagentandroid.core.data.source.remote.RemoteDataSource
+import com.submission.valorantagentandroid.core.data.source.remote.AgentRemoteDataSource
 import com.submission.valorantagentandroid.core.data.source.remote.network.ApiResponse
-import com.submission.valorantagentandroid.core.data.source.remote.response.AgentResponse
+import com.submission.valorantagentandroid.core.data.source.remote.response.agent.AgentResponse
 import com.submission.valorantagentandroid.core.domain.model.Agent
 import com.submission.valorantagentandroid.core.domain.repository.IAgentRepository
 import com.submission.valorantagentandroid.core.utils.AppExecutors
-import com.submission.valorantagentandroid.core.utils.DataMapper
+import com.submission.valorantagentandroid.core.utils.DataMapperAgent
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
 class AgentRepository(
-    private val remoteDataSource: RemoteDataSource,
+    private val agentRemoteDataSource: AgentRemoteDataSource,
     private val localDataSource: LocalDataSource,
     private val appExecutors: AppExecutors
 ) : IAgentRepository {
@@ -20,17 +22,19 @@ class AgentRepository(
         object : NetworkBoundResource<List<Agent>, List<AgentResponse>>() {
             override fun loadFromDB(): Flow<List<Agent>> {
                 return localDataSource.getAllAgent().map {
-                    DataMapper.mapEntitiesToDomain(it)
+                    DataMapperAgent.mapEntitiesToDomain(it)
                 }
             }
 
-            override fun shouldFetch(data: List<Agent>?): Boolean = false
+            override fun shouldFetch(data: List<Agent>?): Boolean {
+                return data.isNullOrEmpty()
+            }
 
             override suspend fun createCall(): Flow<ApiResponse<List<AgentResponse>>> =
-                remoteDataSource.getAllAgent()
+                agentRemoteDataSource.getAllAgent()
 
             override suspend fun saveCallResult(data: List<AgentResponse>) {
-                val agentList = DataMapper.mapResponseToEntities(data)
+                val agentList = DataMapperAgent.mapResponseToEntities(data)
                 localDataSource.insertAgent(agentList)
             }
 
@@ -38,12 +42,12 @@ class AgentRepository(
 
     override fun getFavoriteAgent(): Flow<List<Agent>> {
         return localDataSource.getFavoriteAgent().map {
-            DataMapper.mapEntitiesToDomain(it)
+            DataMapperAgent.mapEntitiesToDomain(it)
         }
     }
 
     override fun setFavoriteAgent(agent: Agent, state: Boolean) {
-        val agentEntity = DataMapper.mapDomainToEntity(agent)
+        val agentEntity = DataMapperAgent.mapDomainToEntity(agent)
         appExecutors.diskIO().execute {
             localDataSource.setFavoriteAgent(agentEntity, state)
         }

@@ -1,4 +1,4 @@
-package com.submission.valorantagentandroid.core.data.source.local.room
+package com.submission.valorantagentandroid.core.data.source.local.room.agent
 
 import androidx.room.Dao
 import androidx.room.Insert

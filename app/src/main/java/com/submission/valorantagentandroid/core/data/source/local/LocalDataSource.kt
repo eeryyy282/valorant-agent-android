@@ -1,11 +1,13 @@
 package com.submission.valorantagentandroid.core.data.source.local
 
 import com.submission.valorantagentandroid.core.data.source.local.entity.AgentEntity
-import com.submission.valorantagentandroid.core.data.source.local.room.AgentDao
+import com.submission.valorantagentandroid.core.data.source.local.entity.NewsEntity
+import com.submission.valorantagentandroid.core.data.source.local.room.agent.AgentDao
+import com.submission.valorantagentandroid.core.data.source.local.room.news.NewsDao
 import kotlinx.coroutines.flow.Flow
 
 
-class LocalDataSource(private val agentDao: AgentDao) {
+class LocalDataSource(private val agentDao: AgentDao, private val newsDao: NewsDao) {
 
     fun getAllAgent(): Flow<List<AgentEntity>> = agentDao.getAllAgent()
 
@@ -18,4 +20,8 @@ class LocalDataSource(private val agentDao: AgentDao) {
         agentDao.updateFavoriteAgent(agent)
 
     }
+
+    fun getAllNews(): Flow<List<NewsEntity>> = newsDao.getAllNews()
+
+    suspend fun insertNews(newsList: List<NewsEntity>) = newsDao.insertNews(newsList)
 }

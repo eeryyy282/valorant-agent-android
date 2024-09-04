@@ -1,4 +1,4 @@
-package com.submission.valorantagentandroid.core.data.source.remote.response
+package com.submission.valorantagentandroid.core.data.source.remote.response.agent
 
 import com.google.gson.annotations.SerializedName
 
