@@ -2,14 +2,18 @@ package com.submission.valorantagentandroid.presentation
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.submission.valorantagentandroid.R
 import com.submission.valorantagentandroid.databinding.ActivityMainBinding
+import com.submission.valorantagentandroid.presentation.settings.SettingsViewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : AppCompatActivity() {
 
+    private val settingViewModel: SettingsViewModel by viewModel()
     private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -23,5 +27,17 @@ class MainActivity : AppCompatActivity() {
 
         val navController = findNavController(R.id.nav_host_fragment_activity_main)
         navView.setupWithNavController(navController)
+
+        checkDarkMode()
+    }
+
+    private fun checkDarkMode() {
+        settingViewModel.getThemeSetting.observe(this) { darkMode ->
+            if (darkMode) {
+                delegate.localNightMode = AppCompatDelegate.MODE_NIGHT_YES
+            } else {
+                delegate.localNightMode = AppCompatDelegate.MODE_NIGHT_NO
+            }
+        }
     }
 }

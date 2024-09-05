@@ -4,7 +4,10 @@ import androidx.room.Room
 import com.submission.valorantagentandroid.BuildConfig
 import com.submission.valorantagentandroid.core.data.repository.AgentRepository
 import com.submission.valorantagentandroid.core.data.repository.NewsRepository
+import com.submission.valorantagentandroid.core.data.repository.SettingRepository
 import com.submission.valorantagentandroid.core.data.source.local.LocalDataSource
+import com.submission.valorantagentandroid.core.data.source.local.pref.SettingPreference
+import com.submission.valorantagentandroid.core.data.source.local.pref.dataStore
 import com.submission.valorantagentandroid.core.data.source.local.room.agent.AgentDatabase
 import com.submission.valorantagentandroid.core.data.source.local.room.news.NewsDatabase
 import com.submission.valorantagentandroid.core.data.source.remote.AgentRemoteDataSource
@@ -13,6 +16,7 @@ import com.submission.valorantagentandroid.core.data.source.remote.network.Agent
 import com.submission.valorantagentandroid.core.data.source.remote.network.NewsApiService
 import com.submission.valorantagentandroid.core.domain.repository.IAgentRepository
 import com.submission.valorantagentandroid.core.domain.repository.INewsRepository
+import com.submission.valorantagentandroid.core.domain.repository.ISettingRepository
 import com.submission.valorantagentandroid.core.utils.AppExecutors
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -70,11 +74,14 @@ val networkModule = module {
 
 
 val repositoryModule = module {
-    single { LocalDataSource(get(), get()) }
+    single { LocalDataSource(get(), get(), get()) }
     single { AgentRemoteDataSource(get()) }
     single { NewsRemoteDataSource(get()) }
+    single { androidContext().dataStore }
+    single { SettingPreference(get()) }
     factory { AppExecutors() }
     single<IAgentRepository> { AgentRepository(get(), get(), get()) }
     single<INewsRepository> { NewsRepository(get(), get()) }
+    single<ISettingRepository> { SettingRepository(get()) }
 
 }

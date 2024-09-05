@@ -2,12 +2,17 @@ package com.submission.valorantagentandroid.core.data.source.local
 
 import com.submission.valorantagentandroid.core.data.source.local.entity.AgentEntity
 import com.submission.valorantagentandroid.core.data.source.local.entity.NewsEntity
+import com.submission.valorantagentandroid.core.data.source.local.pref.SettingPreference
 import com.submission.valorantagentandroid.core.data.source.local.room.agent.AgentDao
 import com.submission.valorantagentandroid.core.data.source.local.room.news.NewsDao
 import kotlinx.coroutines.flow.Flow
 
 
-class LocalDataSource(private val agentDao: AgentDao, private val newsDao: NewsDao) {
+class LocalDataSource(
+    private val agentDao: AgentDao,
+    private val newsDao: NewsDao,
+    private val settingPreference: SettingPreference
+) {
 
     fun getAllAgent(): Flow<List<AgentEntity>> = agentDao.getAllAgent()
 
@@ -20,10 +25,14 @@ class LocalDataSource(private val agentDao: AgentDao, private val newsDao: NewsD
     fun setFavoriteAgent(agent: AgentEntity, newState: Boolean) {
         agent.isFavorite = newState
         agentDao.updateFavoriteAgent(agent)
-
     }
 
     fun getAllNews(): Flow<List<NewsEntity>> = newsDao.getAllNews()
 
     suspend fun insertNews(newsList: List<NewsEntity>) = newsDao.insertNews(newsList)
+
+    fun getThemeSetting(): Flow<Boolean> = settingPreference.getThemeSetting()
+
+    suspend fun saveThemeSetting(isDarkModeActive: Boolean) =
+        settingPreference.saveThemeSetting(isDarkModeActive)
 }

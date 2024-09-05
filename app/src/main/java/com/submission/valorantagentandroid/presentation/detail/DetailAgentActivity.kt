@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.util.Log
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.bumptech.glide.Glide
@@ -34,6 +35,17 @@ class DetailAgentActivity : AppCompatActivity() {
         }
 
         setupIntentData()
+        checkDarkMode()
+    }
+
+    private fun checkDarkMode() {
+        detailAgentViewModel.getThemeSetting.observe(this) { darkMode ->
+            if (darkMode) {
+                delegate.localNightMode = AppCompatDelegate.MODE_NIGHT_YES
+            } else {
+                delegate.localNightMode = AppCompatDelegate.MODE_NIGHT_NO
+            }
+        }
     }
 
     @Suppress("DEPRECATION")

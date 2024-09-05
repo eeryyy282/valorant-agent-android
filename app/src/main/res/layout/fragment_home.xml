@@ -19,6 +19,7 @@
             android:fontFamily="@font/dinnext_medium"
             android:text="@string/hi_n_nfind_your_favorite_agent"
             android:textSize="20sp"
+            android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 

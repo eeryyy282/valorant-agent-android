@@ -2,20 +2,23 @@ package com.submission.valorantagentandroid.presentation
 
 import android.annotation.SuppressLint
 import android.content.Intent
-import android.content.res.Configuration
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.submission.valorantagentandroid.R
 import com.submission.valorantagentandroid.databinding.ActivitySplashScreenBinding
+import com.submission.valorantagentandroid.presentation.settings.SettingsViewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 @SuppressLint("CustomSplashScreen")
 class SplashScreen : AppCompatActivity() {
+    private val settingViewModel: SettingsViewModel by viewModel()
     private lateinit var binding: ActivitySplashScreenBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -39,12 +42,25 @@ class SplashScreen : AppCompatActivity() {
     }
 
     private fun checkDarkMode() {
-        val isDarkModeActive =
-            (resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK == Configuration.UI_MODE_NIGHT_YES)
-        if (isDarkModeActive) {
-            binding.ivSplashScreen.setColorFilter(ContextCompat.getColor(this, R.color.white))
-        } else {
-            binding.ivSplashScreen.setColorFilter(ContextCompat.getColor(this, R.color.black))
+        settingViewModel.getThemeSetting.observe(this) { isDarkModeActive ->
+            if (isDarkModeActive) {
+                binding.ivSplashScreen.setColorFilter(
+                    ContextCompat.getColor(
+                        this,
+                        R.color.white
+                    )
+                )
+                delegate.localNightMode = AppCompatDelegate.MODE_NIGHT_YES
+            } else {
+                binding.ivSplashScreen.setColorFilter(
+                    ContextCompat.getColor(
+                        this,
+                        R.color.black
+                    )
+                )
+                delegate.localNightMode = AppCompatDelegate.MODE_NIGHT_NO
+
+            }
         }
     }
 }
