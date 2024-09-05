@@ -24,6 +24,7 @@
                 android:id="@+id/iv_background_agent_detail"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
+                android:contentDescription="@string/backgrouind_agent"
                 android:scaleType="centerCrop"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -35,6 +36,7 @@
                 android:id="@+id/iv_agent_detail"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
+                android:contentDescription="@string/image_agent_detail"
                 android:scaleType="centerCrop"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -140,7 +142,6 @@
         android:id="@+id/button_share_detail_agent"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-
         android:layout_marginTop="16dp"
         android:drawableLeft="@drawable/share_icon"
         android:drawableTint="@color/white"

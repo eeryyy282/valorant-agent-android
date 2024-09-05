@@ -9,17 +9,17 @@ import kotlinx.coroutines.flow.map
 
 abstract class NetworkBoundResource<ResultType, RequestType> {
 
-    private var result: Flow<com.submission.valorantagentandroid.core.data.Resource<ResultType>> =
+    private var result: Flow<Resource<ResultType>> =
         flow {
-            emit(com.submission.valorantagentandroid.core.data.Resource.Loading())
+            emit(Resource.Loading())
             val dbSource = loadFromDB().first()
             if (shouldFetch(dbSource)) {
-                emit(com.submission.valorantagentandroid.core.data.Resource.Loading())
+                emit(Resource.Loading())
                 when (val apiResponse = createCall().first()) {
                     is ApiResponse.Success -> {
                         saveCallResult(apiResponse.data)
                         emitAll(loadFromDB().map {
-                            com.submission.valorantagentandroid.core.data.Resource.Success(
+                            Resource.Success(
                                 it
                             )
                         })
@@ -27,7 +27,7 @@ abstract class NetworkBoundResource<ResultType, RequestType> {
 
                     is ApiResponse.Empty -> {
                         emitAll(loadFromDB().map {
-                            com.submission.valorantagentandroid.core.data.Resource.Success(
+                            Resource.Success(
                                 it
                             )
                         })
@@ -36,7 +36,7 @@ abstract class NetworkBoundResource<ResultType, RequestType> {
                     is ApiResponse.Error -> {
                         onFetchFailed()
                         emit(
-                            com.submission.valorantagentandroid.core.data.Resource.Error(
+                            Resource.Error(
                                 apiResponse.errorMessage
                             )
                         )
@@ -44,7 +44,7 @@ abstract class NetworkBoundResource<ResultType, RequestType> {
                 }
             } else {
                 emitAll(loadFromDB().map {
-                    com.submission.valorantagentandroid.core.data.Resource.Success(
+                    Resource.Success(
                         it
                     )
                 })
@@ -61,5 +61,5 @@ abstract class NetworkBoundResource<ResultType, RequestType> {
 
     protected abstract suspend fun saveCallResult(data: RequestType)
 
-    fun asFlow(): Flow<com.submission.valorantagentandroid.core.data.Resource<ResultType>> = result
+    fun asFlow(): Flow<Resource<ResultType>> = result
 }
