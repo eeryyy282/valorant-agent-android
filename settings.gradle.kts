@@ -21,4 +21,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "valorantagentandroid"
 include(":app")
- 
+include(":core")

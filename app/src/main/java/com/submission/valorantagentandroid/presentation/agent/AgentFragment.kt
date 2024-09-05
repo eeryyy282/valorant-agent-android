@@ -10,7 +10,6 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
-import com.submission.valorantagentandroid.core.data.Resource
 import com.submission.valorantagentandroid.core.domain.model.Agent
 import com.submission.valorantagentandroid.core.ui.AgentAdapterComplete
 import com.submission.valorantagentandroid.core.utils.BackgroundInsertorGradient.createGradientDrawable
@@ -90,19 +89,19 @@ class AgentFragment : Fragment() {
                 if (agent != null) {
                     with(binding) {
                         when (agent) {
-                            is Resource.Error -> {
+                            is com.submission.valorantagentandroid.core.data.Resource.Error -> {
                                 progressBarAgent.visibility = View.GONE
                                 tvErrorAgent.visibility = View.VISIBLE
                                 ivErrorAgent.visibility = View.VISIBLE
                             }
 
-                            is Resource.Loading -> {
+                            is com.submission.valorantagentandroid.core.data.Resource.Loading -> {
                                 progressBarAgent.visibility = View.VISIBLE
                                 tvErrorAgent.visibility = View.GONE
                                 ivErrorAgent.visibility = View.GONE
                             }
 
-                            is Resource.Success -> {
+                            is com.submission.valorantagentandroid.core.data.Resource.Success -> {
                                 progressBarAgent.visibility = View.GONE
                                 tvErrorAgent.visibility = View.GONE
                                 ivErrorAgent.visibility = View.GONE
@@ -121,9 +120,10 @@ class AgentFragment : Fragment() {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                agentViewModel.searchAgent(query = s.toString()).observe(viewLifecycleOwner) { searchResult ->
-                    agentAdapter.setData(searchResult)
-                }
+                agentViewModel.searchAgent(query = s.toString())
+                    .observe(viewLifecycleOwner) { searchResult ->
+                        agentAdapter.setData(searchResult)
+                    }
             }
 
             override fun afterTextChanged(s: Editable?) {}

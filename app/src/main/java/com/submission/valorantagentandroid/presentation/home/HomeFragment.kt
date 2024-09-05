@@ -12,7 +12,6 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.submission.valorantagentandroid.R
-import com.submission.valorantagentandroid.core.data.Resource
 import com.submission.valorantagentandroid.core.domain.model.Agent
 import com.submission.valorantagentandroid.core.ui.AgentAdapter
 import com.submission.valorantagentandroid.core.ui.NewsAdapter
@@ -81,21 +80,21 @@ class HomeFragment : Fragment() {
                 if (agent != null) {
                     with(binding) {
                         when (agent) {
-                            is Resource.Error -> {
+                            is com.submission.valorantagentandroid.core.data.Resource.Error -> {
                                 progressBarTopAgent.visibility = View.GONE
                                 ivErrorTopAgentHome.visibility = View.VISIBLE
                                 tvErrorTopAgentMessageHome.visibility = View.VISIBLE
 
                             }
 
-                            is Resource.Loading -> {
+                            is com.submission.valorantagentandroid.core.data.Resource.Loading -> {
                                 progressBarTopAgent.visibility = View.VISIBLE
                                 ivErrorTopAgentHome.visibility = View.GONE
                                 tvErrorTopAgentMessageHome.visibility = View.GONE
 
                             }
 
-                            is Resource.Success -> {
+                            is com.submission.valorantagentandroid.core.data.Resource.Success -> {
                                 progressBarTopAgent.visibility = View.GONE
                                 ivErrorTopAgentHome.visibility = View.GONE
                                 tvErrorTopAgentMessageHome.visibility = View.GONE
@@ -144,20 +143,20 @@ class HomeFragment : Fragment() {
                 if (news != null) {
                     with(binding) {
                         when (news) {
-                            is Resource.Error -> {
+                            is com.submission.valorantagentandroid.core.data.Resource.Error -> {
                                 progressBarNews.visibility = View.GONE
                                 ivErrorNewsHome.visibility = View.VISIBLE
                                 tvErrorNewsmessageHome.visibility = View.VISIBLE
 
                             }
 
-                            is Resource.Loading -> {
+                            is com.submission.valorantagentandroid.core.data.Resource.Loading -> {
                                 progressBarNews.visibility = View.VISIBLE
                                 ivErrorNewsHome.visibility = View.GONE
                                 tvErrorNewsmessageHome.visibility = View.GONE
                             }
 
-                            is Resource.Success -> {
+                            is com.submission.valorantagentandroid.core.data.Resource.Success -> {
                                 progressBarNews.visibility = View.GONE
                                 ivErrorNewsHome.visibility = View.GONE
                                 tvErrorNewsmessageHome.visibility = View.GONE
