@@ -58,4 +58,10 @@ class AgentRepository(
             localDataSource.setFavoriteAgent(agentEntity, state)
         }
     }
+
+    override fun searchAgent(query: String): Flow<List<Agent>> {
+        return localDataSource.searchAgent(query).map {
+            DataMapperAgent.mapEntitiesToDomain(it)
+        }
+    }
 }

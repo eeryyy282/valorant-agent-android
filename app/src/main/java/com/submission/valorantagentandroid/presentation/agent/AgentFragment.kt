@@ -2,6 +2,8 @@ package com.submission.valorantagentandroid.presentation.agent
 
 import android.content.Intent
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -20,51 +22,50 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 class AgentFragment : Fragment() {
     private val agentViewModel: AgentViewModel by viewModel()
     private var _binding: FragmentAgentBinding? = null
-
     private val binding get() = _binding!!
+    private lateinit var agentAdapter: AgentAdapterComplete
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentAgentBinding.inflate(inflater, container, false)
-        val root: View = binding.root
-        return root
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupAgentOfDay()
-        recyclerViewAgent()
+        setupRecyclerViewAgent()
+        setupSearchAgent()
     }
-
 
     private fun setupAgentOfDay() {
         if (activity != null) {
-            val randomNumber = (1..10).random()
             agentViewModel.agentRandom.observe(viewLifecycleOwner) { agentOfTheDay ->
                 val listData = agentOfTheDay.data
-                if (listData != null) {
-                    binding.tvAgentNameOfTheDayAgent.text = listData[randomNumber].displayName
-                    binding.tvAgentDeveloperNameAgent.text = listData[randomNumber].developerName
-                    binding.tvAgentDescriptionAgent.text = listData[randomNumber].description
+                if (!listData.isNullOrEmpty()) {
+                    val randomNumber = (0 until listData.size).random()
+                    val agent = listData[randomNumber]
+                    binding.tvAgentNameOfTheDayAgent.text = agent.displayName
+                    binding.tvAgentDeveloperNameAgent.text = agent.developerName
+                    binding.tvAgentDescriptionAgent.text = agent.description
                     Glide.with(this)
-                        .load(listData[randomNumber].background)
+                        .load(agent.background)
                         .into(binding.ivBackgroundAgentOfTheDay)
                     Glide.with(this)
-                        .load(listData[randomNumber].fullPortrait)
+                        .load(agent.fullPortrait)
                         .into(binding.ivAgentOfTheDayAgent)
-                    val gradientDrawable =
-                        createGradientDrawable(listData[randomNumber].backgroundGradientColors)
+                    val gradientDrawable = createGradientDrawable(agent.backgroundGradientColors)
                     binding.cvAgentOfTheDayAgent.background = gradientDrawable
 
+                    setupAction(agent)
                 }
-                setupAction(listData?.get(randomNumber))
             }
         }
     }
 
-    private fun setupAction(agent: Agent?) {
+    private fun setupAction(agent: Agent) {
         binding.cvAgentOfTheDayAgent.setOnClickListener {
             val intent = Intent(activity, DetailAgentActivity::class.java)
             intent.putExtra(DetailAgentActivity.EXTRA_DATA, agent)
@@ -72,14 +73,18 @@ class AgentFragment : Fragment() {
         }
     }
 
-    private fun recyclerViewAgent() {
+    private fun setupRecyclerViewAgent() {
         if (activity != null) {
-            val agentAdapter = AgentAdapterComplete()
+            agentAdapter = AgentAdapterComplete()
             agentAdapter.onItemClick = { selectedAgent ->
                 val intent = Intent(activity, DetailAgentActivity::class.java)
                 intent.putExtra(DetailAgentActivity.EXTRA_DATA, selectedAgent)
                 startActivity(intent)
             }
+
+            binding.rvAgentAgent.layoutManager =
+                LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+            binding.rvAgentAgent.adapter = agentAdapter
 
             agentViewModel.agent.observe(viewLifecycleOwner) { agent ->
                 if (agent != null) {
@@ -87,7 +92,7 @@ class AgentFragment : Fragment() {
                         when (agent) {
                             is Resource.Error -> {
                                 progressBarAgent.visibility = View.GONE
-                                tvErrorAgent.visibility = View.GONE
+                                tvErrorAgent.visibility = View.VISIBLE
                                 ivErrorAgent.visibility = View.VISIBLE
                             }
 
@@ -102,24 +107,31 @@ class AgentFragment : Fragment() {
                                 tvErrorAgent.visibility = View.GONE
                                 ivErrorAgent.visibility = View.GONE
                                 agentAdapter.setData(agent.data)
-
                             }
+
                         }
                     }
-                }
-                with(binding.rvAgentAgent) {
-                    layoutManager =
-                        LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-                    adapter = agentAdapter
                 }
             }
         }
     }
 
+    private fun setupSearchAgent() {
+        binding.tieSearchAgent.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
 
-    override fun onDestroy() {
-        super.onDestroy()
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                agentViewModel.searchAgent(query = s.toString()).observe(viewLifecycleOwner) { searchResult ->
+                    agentAdapter.setData(searchResult)
+                }
+            }
+
+            override fun afterTextChanged(s: Editable?) {}
+        })
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
         _binding = null
-
     }
 }

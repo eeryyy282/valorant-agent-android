@@ -7,4 +7,6 @@ import com.submission.valorantagentandroid.core.domain.usecase.agent.AgentUseCas
 class AgentViewModel(private val agentUseCase: AgentUseCase) : ViewModel() {
     val agentRandom = agentUseCase.getAllAgent().asLiveData()
     val agent = agentUseCase.getAllAgent().asLiveData()
+
+    fun searchAgent(query: String) = agentUseCase.searchAgent(query).asLiveData()
 }

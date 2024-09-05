@@ -27,6 +27,8 @@ class LocalDataSource(
         agentDao.updateFavoriteAgent(agent)
     }
 
+    fun searchAgent(query: String): Flow<List<AgentEntity>> = agentDao.searchAgent(query)
+
     fun getAllNews(): Flow<List<NewsEntity>> = newsDao.getAllNews()
 
     suspend fun insertNews(newsList: List<NewsEntity>) = newsDao.insertNews(newsList)

@@ -12,4 +12,6 @@ interface IAgentRepository {
     fun getRandomAgent(): Flow<List<Agent>>
 
     fun setFavoriteAgent(agent: Agent, state: Boolean)
+
+    fun searchAgent(query: String): Flow<List<Agent>>
 }

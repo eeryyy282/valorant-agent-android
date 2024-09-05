@@ -9,4 +9,5 @@ interface AgentUseCase {
     fun getFavoriteAgent(): Flow<List<Agent>>
     fun getOneAgent(): Flow<List<Agent>>
     fun setFavoriteAgent(agent: Agent, state: Boolean)
+    fun searchAgent(query: String): Flow<List<Agent>>
 }
