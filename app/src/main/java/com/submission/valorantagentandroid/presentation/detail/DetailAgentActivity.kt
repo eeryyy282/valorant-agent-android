@@ -1,6 +1,7 @@
 package com.submission.valorantagentandroid.presentation.detail
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
@@ -71,6 +72,8 @@ class DetailAgentActivity : AppCompatActivity() {
             setupFavoriteAction(detailAgent)
             val gradientDrawable = createGradientDrawable(detailAgent.backgroundGradientColors)
             binding.cvAgentDetailPotrait.background = gradientDrawable
+
+            setupAction(detailAgent)
         }
     }
 
@@ -123,6 +126,26 @@ class DetailAgentActivity : AppCompatActivity() {
                 it.setBackgroundColor(R.color.green)
                 it.setCompoundDrawablesWithIntrinsicBounds(R.drawable.add_icon, 0, 0, 0)
             }
+        }
+    }
+
+    private fun setupAction(detailAgent: Agent?) {
+        binding.buttonShareDetailAgent.setOnClickListener {
+            val agentName = detailAgent?.displayName
+            val agentPortrait = detailAgent?.fullPortrait
+            val agentDeveloperName = detailAgent?.developerName
+
+            val shareIntent: Intent = Intent().apply {
+                action = Intent.ACTION_SEND
+                putExtra(
+                    Intent.EXTRA_TEXT,
+                    "I found my favorite agent, $agentName, $agentDeveloperName.\n$agentPortrait"
+                )
+                type = "text/plain"
+            }
+            val share = Intent.createChooser(shareIntent, "Share $agentName")
+            startActivity(share)
+
         }
     }
 
