@@ -1,5 +1,7 @@
 package com.submission.valorantagentandroid.presentation
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
@@ -19,6 +21,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+
         binding = ActivityMainBinding.inflate(layoutInflater)
 
         setContentView(binding.root)
@@ -29,6 +32,7 @@ class MainActivity : AppCompatActivity() {
         navView.setupWithNavController(navController)
 
         checkDarkMode()
+        setupAction()
     }
 
     private fun checkDarkMode() {
@@ -38,6 +42,13 @@ class MainActivity : AppCompatActivity() {
             } else {
                 delegate.localNightMode = AppCompatDelegate.MODE_NIGHT_NO
             }
+        }
+    }
+
+    private fun setupAction() {
+        binding.fabFavorite.setOnClickListener {
+            val uri = Uri.parse("valorantagentandroid://favorite")
+            startActivity(Intent(Intent.ACTION_VIEW, uri))
         }
     }
 }

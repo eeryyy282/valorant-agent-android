@@ -8,7 +8,6 @@ import com.submission.valorantagentandroid.core.domain.usecase.pref.SettingInter
 import com.submission.valorantagentandroid.core.domain.usecase.pref.SettingUseCase
 import com.submission.valorantagentandroid.presentation.agent.AgentViewModel
 import com.submission.valorantagentandroid.presentation.detail.DetailAgentViewModel
-import com.submission.valorantagentandroid.presentation.favorite.FavoriteViewModel
 import com.submission.valorantagentandroid.presentation.home.HomeViewModel
 import com.submission.valorantagentandroid.presentation.settings.SettingsViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
@@ -22,7 +21,6 @@ val useCaseModule = module {
 
 val viewModelModule = module {
     viewModel { HomeViewModel(get(), get()) }
-    viewModel { FavoriteViewModel(get()) }
     viewModel { DetailAgentViewModel(get(), get()) }
     viewModel { AgentViewModel(get()) }
     viewModel { SettingsViewModel(get()) }

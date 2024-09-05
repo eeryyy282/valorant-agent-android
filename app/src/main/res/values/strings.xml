@@ -47,4 +47,5 @@
     <string name="image_diplay_icon_agent">Image diplay icon agent</string>
     <string name="share">Share</string>
     <string name="image_agent_detail">image agent detail</string>
+    <string name="action_button_agent">Action button agent</string>
 </resources>

@@ -1,4 +1,4 @@
-package com.submission.valorantagentandroid.presentation.favorite
+package com.submission.valorantagentandroid.favorite
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData

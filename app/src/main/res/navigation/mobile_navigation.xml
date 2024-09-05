@@ -18,12 +18,6 @@
         tools:layout="@layout/fragment_agent" />
 
     <fragment
-        android:id="@+id/navigation_favorite"
-        android:name="com.submission.valorantagentandroid.presentation.favorite.FavoriteFragment"
-        android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_favorite" />
-
-    <fragment
         android:id="@+id/navigation_settings"
         android:name="com.submission.valorantagentandroid.presentation.settings.SettingsFragment"
         android:label="@string/title_notifications"
