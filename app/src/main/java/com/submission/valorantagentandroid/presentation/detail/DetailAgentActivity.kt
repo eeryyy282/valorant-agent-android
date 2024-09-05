@@ -65,6 +65,9 @@ class DetailAgentActivity : AppCompatActivity() {
             Glide.with(this@DetailAgentActivity)
                 .load(detailAgent.fullPortrait)
                 .into(binding.ivAgentDetail)
+            Glide.with(this@DetailAgentActivity)
+                .load(detailAgent.displayIcon)
+                .into(binding.ivDisplayIconAgent)
             setupFavoriteAction(detailAgent)
             val gradientDrawable = createGradientDrawable(detailAgent.backgroundGradientColors)
             binding.cvAgentDetailPotrait.background = gradientDrawable
