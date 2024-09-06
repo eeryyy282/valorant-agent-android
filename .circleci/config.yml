@@ -8,8 +8,9 @@ executors:
     docker:
       - image: cimg/openjdk:17.0
     environment:
-      JVM_OPTS: "-Xmx3200m"
+      JVM_OPTS: "-Xmx2048m"
       ANDROID_HOME: /opt/android/sdk
+    resource_class: large
 
 jobs:
   build:
@@ -42,6 +43,15 @@ jobs:
           paths:
             - ~/.android/build-cache
             - ~/.android/cache
+      - run:
+          name: Debug Environment
+          command: |
+            echo "Environment Variables:"
+            printenv
+            echo "Disk Usage:"
+            df -h
+            echo "Memory Usage:"
+            free -h
       - run:
           name: Run Build
           command: ./gradlew build
