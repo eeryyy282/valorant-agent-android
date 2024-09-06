@@ -9,12 +9,26 @@ executors:
       - image: cimg/openjdk:17.0
     environment:
       JVM_OPTS: "-Xmx3200m"
+      ANDROID_HOME: /opt/android/sdk
 
 jobs:
   build:
     executor: android-executor
     steps:
       - checkout
+      - run:
+          name: Setup Android SDK
+          command: |
+            sudo mkdir -p /opt/android/sdk
+            sudo chown -R circleci:circleci /opt/android/sdk
+            wget -q "https://dl.google.com/android/repository/commandlinetools-linux-8512546_latest.zip" -O android-commandline-tools.zip
+            unzip -q android-commandline-tools.zip -d /opt/android/sdk/cmdline-tools
+            mv /opt/android/sdk/cmdline-tools/cmdline-tools /opt/android/sdk/cmdline-tools/latest
+            yes | /opt/android/sdk/cmdline-tools/latest/bin/sdkmanager --licenses
+            /opt/android/sdk/cmdline-tools/latest/bin/sdkmanager "platform-tools" "platforms;android-30" "build-tools;30.0.3"
+      - run:
+          name: Create local.properties
+          command: echo "sdk.dir=/opt/android/sdk" > ./local.properties
       - restore_cache:
           key: android-orb-v1-
       - run:
