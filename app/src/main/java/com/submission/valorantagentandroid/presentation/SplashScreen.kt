@@ -25,6 +25,8 @@ class SplashScreen : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
 
+        val delaySplashScreen: Long = 2500
+
         binding = ActivitySplashScreenBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
@@ -38,7 +40,7 @@ class SplashScreen : AppCompatActivity() {
             val intent = Intent(this@SplashScreen, MainActivity::class.java)
             startActivity(intent)
             finish()
-        }, 2500)
+        }, delaySplashScreen)
     }
 
     private fun checkDarkMode() {

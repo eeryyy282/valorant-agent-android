@@ -2,6 +2,7 @@ package com.submission.valorantagentandroid.core.di
 
 import androidx.room.Room
 import com.submission.valorantagentandroid.core.BuildConfig
+import com.submission.valorantagentandroid.core.data.repository.AgentRepository
 import com.submission.valorantagentandroid.core.data.repository.NewsRepository
 import com.submission.valorantagentandroid.core.data.repository.SettingRepository
 import com.submission.valorantagentandroid.core.data.source.local.LocalDataSource
@@ -45,8 +46,17 @@ val databaseModule = module {
 
 val networkModule = module {
     single {
+
+        val loggingInterceptor = HttpLoggingInterceptor().apply {
+            level = if (BuildConfig.DEBUG) {
+                HttpLoggingInterceptor.Level.BODY
+            } else {
+                HttpLoggingInterceptor.Level.NONE
+            }
+        }
+
         OkHttpClient.Builder()
-            .addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
+            .addInterceptor(loggingInterceptor)
             .connectTimeout(120, TimeUnit.SECONDS)
             .readTimeout(120, TimeUnit.SECONDS)
             .build()
@@ -79,13 +89,7 @@ val repositoryModule = module {
     single { androidContext().dataStore }
     single { SettingPreference(get()) }
     factory { AppExecutors() }
-    single<IAgentRepository> {
-        com.submission.valorantagentandroid.core.data.repository.AgentRepository(
-            get(),
-            get(),
-            get()
-        )
-    }
+    single<IAgentRepository> { AgentRepository(get(), get(), get()) }
     single<INewsRepository> { NewsRepository(get(), get()) }
     single<ISettingRepository> { SettingRepository(get()) }
 

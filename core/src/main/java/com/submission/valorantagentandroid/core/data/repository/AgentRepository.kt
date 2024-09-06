@@ -1,5 +1,7 @@
 package com.submission.valorantagentandroid.core.data.repository
 
+import com.submission.valorantagentandroid.core.data.NetworkBoundResource
+import com.submission.valorantagentandroid.core.data.Resource
 import com.submission.valorantagentandroid.core.data.source.local.LocalDataSource
 import com.submission.valorantagentandroid.core.data.source.remote.AgentRemoteDataSource
 import com.submission.valorantagentandroid.core.data.source.remote.network.ApiResponse
@@ -16,9 +18,9 @@ class AgentRepository(
     private val localDataSource: LocalDataSource,
     private val appExecutors: AppExecutors
 ) : IAgentRepository {
-    override fun getAllAgent(): Flow<com.submission.valorantagentandroid.core.data.Resource<List<Agent>>> =
+    override fun getAllAgent(): Flow<Resource<List<Agent>>> =
         object :
-            com.submission.valorantagentandroid.core.data.NetworkBoundResource<List<Agent>, List<AgentResponse>>() {
+            NetworkBoundResource<List<Agent>, List<AgentResponse>>() {
             override fun loadFromDB(): Flow<List<Agent>> {
                 return localDataSource.getAllAgent().map {
                     DataMapperAgent.mapEntitiesToDomain(it)

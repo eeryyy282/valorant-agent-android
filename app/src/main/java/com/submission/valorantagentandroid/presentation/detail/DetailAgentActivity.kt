@@ -11,9 +11,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import com.bumptech.glide.Glide
 import com.submission.valorantagentandroid.R
 import com.submission.valorantagentandroid.core.domain.model.Agent
+import com.submission.valorantagentandroid.core.utils.InsertImageUri.insertGlideImage
 import com.submission.valorantagentandroid.databinding.ActivityDetailAgentBinding
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -41,11 +41,10 @@ class DetailAgentActivity : AppCompatActivity() {
 
     private fun checkDarkMode() {
         detailAgentViewModel.getThemeSetting.observe(this) { darkMode ->
-            if (darkMode) {
-                delegate.localNightMode = AppCompatDelegate.MODE_NIGHT_YES
-            } else {
-                delegate.localNightMode = AppCompatDelegate.MODE_NIGHT_NO
-            }
+            delegate.localNightMode = if (darkMode)
+                AppCompatDelegate.MODE_NIGHT_YES
+            else
+                AppCompatDelegate.MODE_NIGHT_NO
         }
     }
 
@@ -57,23 +56,32 @@ class DetailAgentActivity : AppCompatActivity() {
 
     private fun showDetailAgent(detailAgent: Agent?) {
         detailAgent?.let {
-            binding.tvAgentNameDetail.text = detailAgent.displayName
-            binding.tvAgentDescriptionDetail.text = detailAgent.description
-            binding.tvAgentDeveloperNameDetail.text = detailAgent.developerName
-            Glide.with(this@DetailAgentActivity)
-                .load(detailAgent.background)
-                .into(binding.ivBackgroundAgentDetail)
-            Glide.with(this@DetailAgentActivity)
-                .load(detailAgent.fullPortrait)
-                .into(binding.ivAgentDetail)
-            Glide.with(this@DetailAgentActivity)
-                .load(detailAgent.displayIcon)
-                .into(binding.ivDisplayIconAgent)
-            setupFavoriteAction(detailAgent)
-            val gradientDrawable = createGradientDrawable(detailAgent.backgroundGradientColors)
-            binding.cvAgentDetailPotrait.background = gradientDrawable
+            with(binding) {
+                tvAgentNameDetail.text = detailAgent.displayName
+                tvAgentDescriptionDetail.text = detailAgent.description
+                tvAgentDeveloperNameDetail.text = detailAgent.developerName
 
-            setupAction(detailAgent)
+                ivBackgroundAgentDetail.insertGlideImage(
+                    ivBackgroundAgentDetail.context,
+                    detailAgent.background
+                )
+
+                ivAgentDetail.insertGlideImage(
+                    ivAgentDetail.context,
+                    detailAgent.fullPortrait
+                )
+
+                ivDisplayIconAgent.insertGlideImage(
+                    ivDisplayIconAgent.context,
+                    detailAgent.displayIcon
+                )
+
+                setupFavoriteAction(detailAgent)
+                val gradientDrawable = createGradientDrawable(detailAgent.backgroundGradientColors)
+                binding.cvAgentDetailPotrait.background = gradientDrawable
+
+                setupAction(detailAgent)
+            }
         }
     }
 

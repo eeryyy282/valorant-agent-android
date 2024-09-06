@@ -2,12 +2,12 @@ package com.submission.valorantagentandroid.favorite
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.View
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.GridLayoutManager
 import com.submission.valorantagentandroid.core.ui.AgentAdapter
 import com.submission.valorantagentandroid.favorite.databinding.ActivityFavoriteBinding
@@ -42,11 +42,10 @@ class FavoriteActivity : AppCompatActivity() {
 
     private fun checkDarkMode() {
         settingViewModel.getThemeSetting.observe(this) { darkMode ->
-            if (darkMode) {
-                delegate.localNightMode = AppCompatDelegate.MODE_NIGHT_YES
-            } else {
-                delegate.localNightMode = AppCompatDelegate.MODE_NIGHT_NO
-            }
+            delegate.localNightMode = if (darkMode)
+                AppCompatDelegate.MODE_NIGHT_YES
+            else
+                AppCompatDelegate.MODE_NIGHT_NO
         }
     }
 
@@ -60,11 +59,10 @@ class FavoriteActivity : AppCompatActivity() {
 
         favoriteViewModel.favoriteAgent.observe(this) { dataAgent ->
             agentAdapter.setData(dataAgent)
-            binding.ivErrorFavoriteAgent.visibility =
-                if (dataAgent.isNotEmpty()) View.GONE else View.VISIBLE
-            binding.tvErrorFavoriteAgent.visibility =
-                if (dataAgent.isNotEmpty()) View.GONE else View.VISIBLE
-
+            with(binding) {
+                ivErrorFavoriteAgent.isVisible = dataAgent.isEmpty()
+                tvErrorFavoriteAgent.isVisible = dataAgent.isEmpty()
+            }
         }
 
         with(binding.rvFavoriteAgent) {

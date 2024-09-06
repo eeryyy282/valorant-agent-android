@@ -37,11 +37,10 @@ class MainActivity : AppCompatActivity() {
 
     private fun checkDarkMode() {
         settingViewModel.getThemeSetting.observe(this) { darkMode ->
-            if (darkMode) {
-                delegate.localNightMode = AppCompatDelegate.MODE_NIGHT_YES
-            } else {
-                delegate.localNightMode = AppCompatDelegate.MODE_NIGHT_NO
-            }
+            delegate.localNightMode = if (darkMode)
+                AppCompatDelegate.MODE_NIGHT_YES
+            else
+                AppCompatDelegate.MODE_NIGHT_NO
         }
     }
 

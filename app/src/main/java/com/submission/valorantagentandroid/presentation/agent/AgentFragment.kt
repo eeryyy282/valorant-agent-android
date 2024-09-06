@@ -9,10 +9,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.bumptech.glide.Glide
+import com.submission.valorantagentandroid.core.data.Resource
 import com.submission.valorantagentandroid.core.domain.model.Agent
 import com.submission.valorantagentandroid.core.ui.AgentAdapterComplete
 import com.submission.valorantagentandroid.core.utils.BackgroundInsertorGradient.createGradientDrawable
+import com.submission.valorantagentandroid.core.utils.InsertImageUri.insertGlideImage
 import com.submission.valorantagentandroid.databinding.FragmentAgentBinding
 import com.submission.valorantagentandroid.presentation.detail.DetailAgentActivity
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -44,21 +45,28 @@ class AgentFragment : Fragment() {
             agentViewModel.agentRandom.observe(viewLifecycleOwner) { agentOfTheDay ->
                 val listData = agentOfTheDay.data
                 if (!listData.isNullOrEmpty()) {
-                    val randomNumber = (0 until listData.size).random()
-                    val agent = listData[randomNumber]
-                    binding.tvAgentNameOfTheDayAgent.text = agent.displayName
-                    binding.tvAgentDeveloperNameAgent.text = agent.developerName
-                    binding.tvAgentDescriptionAgent.text = agent.description
-                    Glide.with(this)
-                        .load(agent.background)
-                        .into(binding.ivBackgroundAgentOfTheDay)
-                    Glide.with(this)
-                        .load(agent.fullPortrait)
-                        .into(binding.ivAgentOfTheDayAgent)
-                    val gradientDrawable = createGradientDrawable(agent.backgroundGradientColors)
-                    binding.cvAgentOfTheDayAgent.background = gradientDrawable
+                    with(binding) {
+                        val randomNumber = listData.indices.random()
+                        val agent = listData[randomNumber]
+                        tvAgentNameOfTheDayAgent.text = agent.displayName
+                        tvAgentDeveloperNameAgent.text = agent.developerName
+                        tvAgentDescriptionAgent.text = agent.description
 
-                    setupAction(agent)
+                        ivAgentOfTheDayAgent.insertGlideImage(
+                            ivAgentOfTheDayAgent.context,
+                            agent.fullPortrait,
+                        )
+
+                        ivBackgroundAgentOfTheDay.insertGlideImage(
+                            ivBackgroundAgentOfTheDay.context,
+                            agent.background
+                        )
+
+                        val gradientDrawable =
+                            createGradientDrawable(agent.backgroundGradientColors)
+                        cvAgentOfTheDayAgent.background = gradientDrawable
+                        setupAction(agent)
+                    }
                 }
             }
         }
@@ -89,19 +97,19 @@ class AgentFragment : Fragment() {
                 if (agent != null) {
                     with(binding) {
                         when (agent) {
-                            is com.submission.valorantagentandroid.core.data.Resource.Error -> {
+                            is Resource.Error -> {
                                 progressBarAgent.visibility = View.GONE
                                 tvErrorAgent.visibility = View.VISIBLE
                                 ivErrorAgent.visibility = View.VISIBLE
                             }
 
-                            is com.submission.valorantagentandroid.core.data.Resource.Loading -> {
+                            is Resource.Loading -> {
                                 progressBarAgent.visibility = View.VISIBLE
                                 tvErrorAgent.visibility = View.GONE
                                 ivErrorAgent.visibility = View.GONE
                             }
 
-                            is com.submission.valorantagentandroid.core.data.Resource.Success -> {
+                            is Resource.Success -> {
                                 progressBarAgent.visibility = View.GONE
                                 tvErrorAgent.visibility = View.GONE
                                 ivErrorAgent.visibility = View.GONE
@@ -129,6 +137,7 @@ class AgentFragment : Fragment() {
             override fun afterTextChanged(s: Editable?) {}
         })
     }
+
 
     override fun onDestroyView() {
         super.onDestroyView()

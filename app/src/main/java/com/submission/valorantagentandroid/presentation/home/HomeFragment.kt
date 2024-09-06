@@ -10,12 +10,13 @@ import androidx.core.content.ContextCompat
 import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.bumptech.glide.Glide
 import com.submission.valorantagentandroid.R
+import com.submission.valorantagentandroid.core.data.Resource
 import com.submission.valorantagentandroid.core.domain.model.Agent
 import com.submission.valorantagentandroid.core.ui.AgentAdapter
 import com.submission.valorantagentandroid.core.ui.NewsAdapter
 import com.submission.valorantagentandroid.core.utils.BackgroundInsertorGradient
+import com.submission.valorantagentandroid.core.utils.InsertImageUri.insertGlideImage
 import com.submission.valorantagentandroid.databinding.FragmentHomeBinding
 import com.submission.valorantagentandroid.presentation.detail.DetailAgentActivity
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -80,21 +81,21 @@ class HomeFragment : Fragment() {
                 if (agent != null) {
                     with(binding) {
                         when (agent) {
-                            is com.submission.valorantagentandroid.core.data.Resource.Error -> {
+                            is Resource.Error -> {
                                 progressBarTopAgent.visibility = View.GONE
                                 ivErrorTopAgentHome.visibility = View.VISIBLE
                                 tvErrorTopAgentMessageHome.visibility = View.VISIBLE
 
                             }
 
-                            is com.submission.valorantagentandroid.core.data.Resource.Loading -> {
+                            is Resource.Loading -> {
                                 progressBarTopAgent.visibility = View.VISIBLE
                                 ivErrorTopAgentHome.visibility = View.GONE
                                 tvErrorTopAgentMessageHome.visibility = View.GONE
 
                             }
 
-                            is com.submission.valorantagentandroid.core.data.Resource.Success -> {
+                            is Resource.Success -> {
                                 progressBarTopAgent.visibility = View.GONE
                                 ivErrorTopAgentHome.visibility = View.GONE
                                 tvErrorTopAgentMessageHome.visibility = View.GONE
@@ -103,12 +104,16 @@ class HomeFragment : Fragment() {
                                 agentAdapter.setData(listDataAgent)
 
                                 if (listDataAgent != null) {
-                                    Glide.with(this@HomeFragment)
-                                        .load(listDataAgent[2].fullPortrait)
-                                        .into(ivAgentHome)
-                                    Glide.with(this@HomeFragment)
-                                        .load(listDataAgent[2].background)
-                                        .into(ivAgentBackgroundHome)
+                                    ivAgentHome.insertGlideImage(
+                                        ivAgentHome.context,
+                                        listDataAgent[2].fullPortrait
+                                    )
+
+                                    ivAgentBackgroundHome.insertGlideImage(
+                                        ivAgentBackgroundHome.context,
+                                        listDataAgent[2].background
+                                    )
+
                                     val colorBackgroundGradient =
                                         BackgroundInsertorGradient.createGradientDrawable(
                                             listDataAgent[2].backgroundGradientColors
@@ -143,20 +148,20 @@ class HomeFragment : Fragment() {
                 if (news != null) {
                     with(binding) {
                         when (news) {
-                            is com.submission.valorantagentandroid.core.data.Resource.Error -> {
+                            is Resource.Error -> {
                                 progressBarNews.visibility = View.GONE
                                 ivErrorNewsHome.visibility = View.VISIBLE
                                 tvErrorNewsmessageHome.visibility = View.VISIBLE
 
                             }
 
-                            is com.submission.valorantagentandroid.core.data.Resource.Loading -> {
+                            is Resource.Loading -> {
                                 progressBarNews.visibility = View.VISIBLE
                                 ivErrorNewsHome.visibility = View.GONE
                                 tvErrorNewsmessageHome.visibility = View.GONE
                             }
 
-                            is com.submission.valorantagentandroid.core.data.Resource.Success -> {
+                            is Resource.Success -> {
                                 progressBarNews.visibility = View.GONE
                                 ivErrorNewsHome.visibility = View.GONE
                                 tvErrorNewsmessageHome.visibility = View.GONE

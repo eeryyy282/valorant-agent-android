@@ -1,5 +1,7 @@
 package com.submission.valorantagentandroid.core.data.repository
 
+import com.submission.valorantagentandroid.core.data.NetworkBoundResource
+import com.submission.valorantagentandroid.core.data.Resource
 import com.submission.valorantagentandroid.core.data.source.local.LocalDataSource
 import com.submission.valorantagentandroid.core.data.source.remote.NewsRemoteDataSource
 import com.submission.valorantagentandroid.core.data.source.remote.network.ApiResponse
@@ -14,9 +16,9 @@ class NewsRepository(
     private val remoteDataSource: NewsRemoteDataSource,
     private val localDataSource: LocalDataSource,
 ) : INewsRepository {
-    override fun getAllNews(): Flow<com.submission.valorantagentandroid.core.data.Resource<List<News>>> =
+    override fun getAllNews(): Flow<Resource<List<News>>> =
         object :
-            com.submission.valorantagentandroid.core.data.NetworkBoundResource<List<News>, List<ArticlesItemResponse>>() {
+            NetworkBoundResource<List<News>, List<ArticlesItemResponse>>() {
             override fun loadFromDB(): Flow<List<News>> {
                 return localDataSource.getAllNews().map {
                     DataMapperNews.mapEntitiesToDomain(it)
