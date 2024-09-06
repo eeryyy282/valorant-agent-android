@@ -51,6 +51,7 @@
         app:backgroundTint="@color/orange"
         app:layout_constraintBottom_toTopOf="@+id/nav_view"
         app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@drawable/icon_favorite_fill" />
+        app:srcCompat="@drawable/icon_favorite_fill"
+        app:tint="@color/white" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
