@@ -9,4 +9,5 @@
     <string name="my_bio">My bio</string>
     <string name="guest">Guest</string>
     <string name="edit_profile">Edit Profile.</string>
+    <string name="title_profile">Profile</string>
 </resources>
