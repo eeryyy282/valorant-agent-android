@@ -47,7 +47,8 @@ class HomeFragment : Fragment() {
     private fun checkDarkMode() {
         val isDarkModeActive = (
                 resources.configuration.uiMode and
-                        Configuration.UI_MODE_NIGHT_MASK == Configuration.UI_MODE_NIGHT_YES
+                        Configuration.UI_MODE_NIGHT_MASK ==
+                        Configuration.UI_MODE_NIGHT_YES
                 )
         with(binding) {
             if (isDarkModeActive) {
@@ -126,7 +127,11 @@ class HomeFragment : Fragment() {
 
                 with(binding.rvTopAgentHome) {
                     layoutManager =
-                        LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+                        LinearLayoutManager(
+                            context,
+                            LinearLayoutManager.HORIZONTAL,
+                            false
+                        )
                     adapter = agentAdapter
                 }
             }
@@ -150,7 +155,6 @@ class HomeFragment : Fragment() {
                                 progressBarNews.visibility = View.GONE
                                 ivErrorNewsHome.visibility = View.VISIBLE
                                 tvErrorNewsmessageHome.visibility = View.VISIBLE
-
                             }
 
                             is Resource.Loading -> {
@@ -170,12 +174,14 @@ class HomeFragment : Fragment() {
                 }
 
                 with(binding.rvNewsHome) {
-                    layoutManager =
-                        LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+                    layoutManager = LinearLayoutManager(
+                        context,
+                        LinearLayoutManager.VERTICAL,
+                        false
+                    )
                     adapter = newsAdapter
                 }
             }
-
         }
     }
 
