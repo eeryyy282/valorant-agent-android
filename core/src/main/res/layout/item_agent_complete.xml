@@ -32,7 +32,7 @@
                         android:id="@+id/iv_background_agent_2"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:contentDescription="@string/backgrouind_agent"
+                        android:contentDescription="@string/background_agent"
                         android:scaleType="centerCrop"
                         app:layout_constraintBottom_toBottomOf="@+id/iv_agent_2"
                         app:layout_constraintEnd_toEndOf="@+id/iv_agent_2"
