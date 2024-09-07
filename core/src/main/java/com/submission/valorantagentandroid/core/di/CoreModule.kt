@@ -20,6 +20,7 @@ import com.submission.valorantagentandroid.core.domain.repository.ISettingReposi
 import com.submission.valorantagentandroid.core.utils.AppExecutors
 import net.sqlcipher.database.SQLiteDatabase
 import net.sqlcipher.database.SupportFactory
+import okhttp3.CertificatePinner
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.android.ext.koin.androidContext
@@ -54,20 +55,38 @@ val databaseModule = module {
 }
 
 val networkModule = module {
-    single {
 
-        val loggingInterceptor = HttpLoggingInterceptor().apply {
-            level = if (BuildConfig.DEBUG) {
-                HttpLoggingInterceptor.Level.BODY
-            } else {
-                HttpLoggingInterceptor.Level.NONE
-            }
+    val loggingInterceptor = HttpLoggingInterceptor().apply {
+        level = if (BuildConfig.DEBUG) {
+            HttpLoggingInterceptor.Level.BODY
+        } else {
+            HttpLoggingInterceptor.Level.NONE
         }
+    }
 
+    single {
+        val hostNameValorant = "valorant-api.com"
+        val certificatePinner = CertificatePinner.Builder()
+            .add(hostNameValorant, "sha256/Bg/J5Mg1jarbiBnw/2Ds6dMJUN0y/CIYvJHsusU2Ozg=")
+            .build()
         OkHttpClient.Builder()
             .addInterceptor(loggingInterceptor)
             .connectTimeout(120, TimeUnit.SECONDS)
             .readTimeout(120, TimeUnit.SECONDS)
+            .certificatePinner(certificatePinner)
+            .build()
+    }
+
+    single {
+        val hostNameNews = "newsapi.org"
+        val certificatePinner = CertificatePinner.Builder()
+            .add(hostNameNews, "sha256/UHYOXs5BxRVKGG7ykhBYGxgne9rRrDaUTXC1MpEtwZU=")
+            .build()
+        OkHttpClient.Builder()
+            .addInterceptor(loggingInterceptor)
+            .connectTimeout(120, TimeUnit.SECONDS)
+            .readTimeout(120, TimeUnit.SECONDS)
+            .certificatePinner(certificatePinner)
             .build()
     }
 
