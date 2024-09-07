@@ -25,7 +25,7 @@ roomKtx = "2.6.1"
 koin-bom = "3.5.6"
 datastorePreferencesVersion = "1.1.1"
 sqlcipher = "4.4.0"
-sqliteKtx = "2.1.0"
+sqliteKtx = "2.4.0"
 
 [libraries]
 datastore-preferences = { module = "androidx.datastore:datastore-preferences", version.ref = "datastorePreferencesVersion" }
