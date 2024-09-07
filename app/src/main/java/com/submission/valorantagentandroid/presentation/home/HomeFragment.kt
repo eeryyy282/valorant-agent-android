@@ -45,9 +45,10 @@ class HomeFragment : Fragment() {
     }
 
     private fun checkDarkMode() {
-        val isDarkModeActive =
-            (resources.configuration.uiMode and
-                    Configuration.UI_MODE_NIGHT_MASK == Configuration.UI_MODE_NIGHT_YES)
+        val isDarkModeActive = (
+                resources.configuration.uiMode and
+                        Configuration.UI_MODE_NIGHT_MASK == Configuration.UI_MODE_NIGHT_YES
+                )
         with(binding) {
             if (isDarkModeActive) {
                 ivLogoHome.setColorFilter(
@@ -84,14 +85,12 @@ class HomeFragment : Fragment() {
                                 progressBarTopAgent.visibility = View.GONE
                                 ivErrorTopAgentHome.visibility = View.VISIBLE
                                 tvErrorTopAgentMessageHome.visibility = View.VISIBLE
-
                             }
 
                             is Resource.Loading -> {
                                 progressBarTopAgent.visibility = View.VISIBLE
                                 ivErrorTopAgentHome.visibility = View.GONE
                                 tvErrorTopAgentMessageHome.visibility = View.GONE
-
                             }
 
                             is Resource.Success -> {
@@ -178,7 +177,6 @@ class HomeFragment : Fragment() {
             }
 
         }
-
     }
 
     private fun setupAction(agent: Agent?) {
@@ -188,7 +186,6 @@ class HomeFragment : Fragment() {
             startActivity(intent)
         }
     }
-
 
     override fun onDestroyView() {
         super.onDestroyView()

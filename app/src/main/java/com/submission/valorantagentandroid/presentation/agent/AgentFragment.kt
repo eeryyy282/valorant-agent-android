@@ -18,7 +18,6 @@ import com.submission.valorantagentandroid.databinding.FragmentAgentBinding
 import com.submission.valorantagentandroid.presentation.detail.DetailAgentActivity
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-
 class AgentFragment : Fragment() {
     private val agentViewModel: AgentViewModel by viewModel()
     private var _binding: FragmentAgentBinding? = null

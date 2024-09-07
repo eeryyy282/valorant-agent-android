@@ -78,9 +78,7 @@ class DetailAgentActivity : AppCompatActivity() {
                     detailAgent.displayIcon
                 )
 
-
                 binding.cvAgentDetailPotrait.background = gradientDrawable
-
             }
             setupFavoriteAction(detailAgent)
             setupAction(detailAgent)
