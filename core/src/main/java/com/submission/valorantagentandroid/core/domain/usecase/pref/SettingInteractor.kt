@@ -9,4 +9,22 @@ class SettingInteractor(private val settingRepository: ISettingRepository) : Set
 
     override suspend fun saveThemeSetting(isDarkModeActive: Boolean) =
         settingRepository.saveThemeSetting(isDarkModeActive)
+
+    override fun getUsername(): Flow<String> =
+        settingRepository.getUserName()
+
+    override suspend fun saveUsername(username: String) =
+        settingRepository.saveUserName(username)
+
+    override fun getUserBio(): Flow<String> =
+        settingRepository.getUserBio()
+
+    override suspend fun saveUserBio(userBio: String) =
+        settingRepository.saveUserBio(userBio)
+
+    override fun getUserImage(): Flow<String> =
+        settingRepository.getUserImage()
+
+    override suspend fun saveUserImage(userImage: String) =
+        settingRepository.saveUserImage(userImage)
 }

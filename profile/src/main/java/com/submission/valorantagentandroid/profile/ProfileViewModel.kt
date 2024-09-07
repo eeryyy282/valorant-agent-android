@@ -1,4 +1,4 @@
-package com.submission.valorantagentandroid.presentation.settings
+package com.submission.valorantagentandroid.profile
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
@@ -7,25 +7,31 @@ import com.submission.valorantagentandroid.core.domain.usecase.agent.AgentUseCas
 import com.submission.valorantagentandroid.core.domain.usecase.pref.SettingUseCase
 import kotlinx.coroutines.launch
 
-class SettingsViewModel(
+class ProfileViewModel(
     private val settingUseCase: SettingUseCase,
     agentUseCase: AgentUseCase
 ) : ViewModel() {
-    val getThemeSetting = settingUseCase.getThemeSetting().asLiveData()
+    val getTheme = settingUseCase.getThemeSetting().asLiveData()
     val getUsername = settingUseCase.getUsername().asLiveData()
     val getUserBio = settingUseCase.getUserBio().asLiveData()
     val getUserImage = settingUseCase.getUserImage().asLiveData()
-    val agent = agentUseCase.getOneAgent().asLiveData()
+    val agent = agentUseCase.getAllAgent().asLiveData()
 
-    fun saveThemeSetting(isDarkModeActive: Boolean) {
+    fun saveUsername(username: String) {
         viewModelScope.launch {
-            settingUseCase.saveThemeSetting(isDarkModeActive)
+            settingUseCase.saveUsername(username)
         }
     }
 
-    fun saveUserImage(imageUri: String) {
+    fun saveUserBio(userBio: String) {
         viewModelScope.launch {
-            settingUseCase.saveUserImage(imageUri)
+            settingUseCase.saveUserBio(userBio)
+        }
+    }
+
+    fun saveUserImage(userImage: String) {
+        viewModelScope.launch {
+            settingUseCase.saveUserImage(userImage)
         }
     }
 }

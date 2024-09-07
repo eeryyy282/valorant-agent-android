@@ -1,10 +1,14 @@
 package com.submission.valorantagentandroid.presentation.settings
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.submission.valorantagentandroid.R
+import com.submission.valorantagentandroid.core.utils.InsertImageUri.insertGlideImage
 import com.submission.valorantagentandroid.databinding.FragmentSettingsBinding
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -29,6 +33,8 @@ class SettingsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         checkDarkMode()
         setupSwitchAction()
+        setupProfile()
+        setupButton()
     }
 
     private fun checkDarkMode() {
@@ -40,6 +46,45 @@ class SettingsFragment : Fragment() {
     private fun setupSwitchAction() {
         binding.switchDarkMode.setOnCheckedChangeListener { _, isChecked ->
             settingsViewModel.saveThemeSetting(isChecked)
+        }
+    }
+
+    private fun setupProfile() {
+        settingsViewModel.apply {
+            getUsername.observe(viewLifecycleOwner) { username ->
+                binding.tvUsernameUser.text = username.ifEmpty {
+                    getString(R.string.guest)
+                }
+            }
+            getUserBio.observe(viewLifecycleOwner) { userBio ->
+                binding.tvBioUser.text = userBio.ifEmpty {
+                    getString(R.string.my_bio)
+                }
+            }
+            getUserImage.observe(viewLifecycleOwner) { imageProfile ->
+                if (imageProfile == "") {
+                    settingsViewModel.agent.observe(viewLifecycleOwner) { randomAgent ->
+                        val agentDisplayPortrait = randomAgent[0].displayIcon
+                        binding.ivProfileUser.insertGlideImage(
+                            requireContext(),
+                            agentDisplayPortrait
+                        )
+                        agentDisplayPortrait?.let { settingsViewModel.saveUserImage(it) }
+                    }
+                } else {
+                    binding.ivProfileUser.insertGlideImage(
+                        requireContext(),
+                        imageProfile
+                    )
+                }
+            }
+        }
+    }
+
+    private fun setupButton() {
+        binding.buttonEditProfile.setOnClickListener {
+            val uri = Uri.parse("valorantagentandroid://profile")
+            startActivity(Intent(Intent.ACTION_VIEW, uri))
         }
     }
 

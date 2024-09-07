@@ -42,4 +42,11 @@
     <string name="share">Share</string>
     <string name="image_agent_detail">image agent detail</string>
     <string name="action_button_agent">Action button agent</string>
+    <string name="edit_profile">Edit Profile</string>
+    <string name="edit_profile_2">Edit Profile.</string>
+    <string name="username">Username</string>
+    <string name="my_bio">My bio</string>
+    <string name="image_profile_user">Image profile user</string>
+    <string name="title_profile">favorite</string>
+    <string name="guest">Guest</string>
 </resources>

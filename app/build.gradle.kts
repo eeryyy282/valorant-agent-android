@@ -73,7 +73,7 @@ android {
         viewBinding = true
         buildConfig = true
     }
-    dynamicFeatures += setOf(":favorite")
+    dynamicFeatures += setOf(":favorite", ":profile")
 }
 
 dependencies {
