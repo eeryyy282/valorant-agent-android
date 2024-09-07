@@ -3,6 +3,13 @@ plugins {
     alias(libs.plugins.jetbrains.kotlin.android)
     id("com.google.devtools.ksp")
     id("kotlin-parcelize")
+    id("org.jlleitschuh.gradle.ktlint")
+}
+
+ktlint {
+    verbose.set(true)
+    android.set(true)
+    outputColorName.set("RED")
 }
 
 android {
