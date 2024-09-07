@@ -32,7 +32,8 @@ class NewsRemoteDataSource(private val apiService: NewsApiService) {
                     ApiResponse.Error(e.toString())
                 )
                 Log.e(
-                    "RemoteDataSourceNews", e.toString()
+                    "RemoteDataSourceNews",
+                    e.toString()
                 )
             }
         }.flowOn(Dispatchers.IO)

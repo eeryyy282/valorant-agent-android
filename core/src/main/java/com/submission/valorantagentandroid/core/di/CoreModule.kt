@@ -39,7 +39,8 @@ val databaseModule = module {
             androidContext(),
             AgentDatabase::class.java,
             "Agent.db"
-        ).fallbackToDestructiveMigration()
+        )
+            .fallbackToDestructiveMigration()
             .openHelperFactory(factory)
             .build()
     }
@@ -50,14 +51,14 @@ val databaseModule = module {
             androidContext(),
             NewsDatabase::class.java,
             "News.db"
-        ).fallbackToDestructiveMigration()
+        )
+            .fallbackToDestructiveMigration()
             .openHelperFactory(factory)
             .build()
     }
 }
 
 val networkModule = module {
-
     val loggingInterceptor = HttpLoggingInterceptor().apply {
         level = if (BuildConfig.DEBUG) {
             HttpLoggingInterceptor.Level.BODY
