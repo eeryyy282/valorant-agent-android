@@ -11,7 +11,7 @@ ktlint {
     android.set(true)
     outputColorName.set("RED")
     @Suppress("DEPRECATION")
-    disabledRules.set(setOf("indent"))
+    disabledRules.set(setOf("indent", "import-ordering"))
 }
 
 android {
