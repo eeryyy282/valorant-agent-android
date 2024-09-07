@@ -1,21 +1,51 @@
-# Add project specific ProGuard rules here.
-# You can control the set of applied configuration files using the
-# proguardFiles setting in build.gradle.
-#
-# For more details, see
-#   http://developer.android.com/guide/developing/tools/proguard.html
+# Retrofit
+-dontwarn okhttp3.**
+-dontwarn okio.**
+-keep class okhttp3.** { *; }
+-keep interface okhttp3.** { *; }
 
-# If your project uses WebView with JS, uncomment the following
-# and specify the fully qualified class name to the JavaScript interface
-# class:
-#-keepclassmembers class fqcn.of.javascript.interface.for.webview {
-#   public *;
-#}
+# Retrofit interfaces
+-keep interface retrofit2.* { *; }
+-keepclassmembers class * {
+    @retrofit2.http.* <methods>;
+}
 
-# Uncomment this to preserve the line number information for
-# debugging stack traces.
-#-keepattributes SourceFile,LineNumberTable
+# Gson
+-keep class com.google.gson.** { *; }
+-keep class com.google.gson.annotations.** { *; }
+-dontwarn com.google.gson.**
 
-# If you keep the line number information, uncomment this to
-# hide the original source file name.
-#-renamesourcefileattribute SourceFile
+# Room database
+-keep class androidx.room.** { *; }
+-keep @androidx.room.Dao class * { *; }
+-dontwarn androidx.room.**
+-keep class * extends androidx.room.RoomDatabase { *; }
+
+# Reflection untuk query Room
+-keep class kotlin.Metadata { *; }
+
+# Koin Dependency Injection
+-keepclassmembers class * implements org.koin.core.module.Module { *; }
+-dontwarn org.koin.**
+
+# Paging 3
+-keep class androidx.paging.** { *; }
+-dontwarn androidx.paging.**
+
+# Kotlin Coroutines
+-dontwarn kotlinx.coroutines.**
+-keep class kotlinx.coroutines.** { *; }
+
+# Glide
+-keep public class * implements com.bumptech.glide.module.GlideModule
+-keep public class * extends com.bumptech.glide.module.LibraryGlideModule
+-keep public class * extends com.bumptech.glide.module.GlideModule
+-dontwarn com.bumptech.glide.**
+
+# Jetpack libraries
+-dontwarn androidx.**
+-keep class androidx.** { *; }
+
+# DataStore Preferences
+-dontwarn androidx.datastore.preferences.**
+-keep class androidx.datastore.preferences.** { *; }

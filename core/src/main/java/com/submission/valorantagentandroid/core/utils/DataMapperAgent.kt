@@ -55,5 +55,4 @@ object DataMapperAgent {
             isPlayableCharacter = input.isPlayableCharacter,
             isFavorite = input.isFavorite,
         )
-
 }

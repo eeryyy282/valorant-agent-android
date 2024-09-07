@@ -29,6 +29,12 @@ jobs:
             - ~/.android/build-cache
             - ~/.android/cache
       - run:
+          name: Check Code Style with Ktlint
+          command: ./gradlew ktlintCheck
+      - store_artifacts:
+          path: app/build/reports/ktlint/
+          destination: code-style-report
+      - run:
           name: Run Build
           command: ./gradlew build
       - store_artifacts:

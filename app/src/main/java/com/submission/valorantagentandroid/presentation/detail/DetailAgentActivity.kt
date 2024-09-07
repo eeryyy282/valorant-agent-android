@@ -41,10 +41,11 @@ class DetailAgentActivity : AppCompatActivity() {
 
     private fun checkDarkMode() {
         detailAgentViewModel.getThemeSetting.observe(this) { darkMode ->
-            delegate.localNightMode = if (darkMode)
+            delegate.localNightMode = if (darkMode) {
                 AppCompatDelegate.MODE_NIGHT_YES
-            else
+            } else {
                 AppCompatDelegate.MODE_NIGHT_NO
+            }
         }
     }
 
@@ -56,6 +57,7 @@ class DetailAgentActivity : AppCompatActivity() {
 
     private fun showDetailAgent(detailAgent: Agent?) {
         detailAgent?.let {
+            val gradientDrawable = createGradientDrawable(detailAgent.backgroundGradientColors)
             with(binding) {
                 tvAgentNameDetail.text = detailAgent.displayName
                 tvAgentDescriptionDetail.text = detailAgent.description
@@ -76,12 +78,10 @@ class DetailAgentActivity : AppCompatActivity() {
                     detailAgent.displayIcon
                 )
 
-                setupFavoriteAction(detailAgent)
-                val gradientDrawable = createGradientDrawable(detailAgent.backgroundGradientColors)
                 binding.cvAgentDetailPotrait.background = gradientDrawable
-
-                setupAction(detailAgent)
             }
+            setupFavoriteAction(detailAgent)
+            setupAction(detailAgent)
         }
     }
 
@@ -126,13 +126,23 @@ class DetailAgentActivity : AppCompatActivity() {
             binding.buttonFavoriteDetail.let {
                 it.text = getString(R.string.remove_favorite)
                 it.setBackgroundColor(getColor(R.color.orange))
-                it.setCompoundDrawablesWithIntrinsicBounds(R.drawable.remove_icon, 0, 0, 0)
+                it.setCompoundDrawablesWithIntrinsicBounds(
+                    R.drawable.remove_icon,
+                    0,
+                    0,
+                    0
+                )
             }
         } else {
             binding.buttonFavoriteDetail.let {
                 it.text = getString(R.string.add_favorite)
                 it.setBackgroundColor(getColor(R.color.green))
-                it.setCompoundDrawablesWithIntrinsicBounds(R.drawable.add_icon, 0, 0, 0)
+                it.setCompoundDrawablesWithIntrinsicBounds(
+                    R.drawable.add_icon,
+                    0,
+                    0,
+                    0
+                )
             }
         }
     }
@@ -147,13 +157,15 @@ class DetailAgentActivity : AppCompatActivity() {
                 action = Intent.ACTION_SEND
                 putExtra(
                     Intent.EXTRA_TEXT,
-                    "I found my favorite agent, $agentName, $agentDeveloperName.\n$agentPortrait"
+                    "I found my favorite agent, " +
+                            "$agentName, " +
+                            "$agentDeveloperName." +
+                            "\n$agentPortrait"
                 )
                 type = "text/plain"
             }
             val share = Intent.createChooser(shareIntent, "Share $agentName")
             startActivity(share)
-
         }
     }
 

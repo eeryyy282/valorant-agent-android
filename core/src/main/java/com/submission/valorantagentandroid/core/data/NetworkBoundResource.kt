@@ -18,23 +18,26 @@ abstract class NetworkBoundResource<ResultType, RequestType> {
                 when (val apiResponse = createCall().first()) {
                     is ApiResponse.Success -> {
                         saveCallResult(apiResponse.data)
-                        emitAll(loadFromDB().map {
-                            Resource.Success(
-                                it
-                            )
-                        })
+                        emitAll(
+                            loadFromDB().map {
+                                Resource.Success(
+                                    it
+                                )
+                            }
+                        )
                     }
 
                     is ApiResponse.Empty -> {
-                        emitAll(loadFromDB().map {
-                            Resource.Success(
-                                it
-                            )
-                        })
+                        emitAll(
+                            loadFromDB().map {
+                                Resource.Success(
+                                    it
+                                )
+                            }
+                        )
                     }
 
                     is ApiResponse.Error -> {
-                        onFetchFailed()
                         emit(
                             Resource.Error(
                                 apiResponse.errorMessage
@@ -43,19 +46,19 @@ abstract class NetworkBoundResource<ResultType, RequestType> {
                     }
                 }
             } else {
-                emitAll(loadFromDB().map {
-                    Resource.Success(
-                        it
-                    )
-                })
+                emitAll(
+                    loadFromDB().map {
+                        Resource.Success(
+                            it
+                        )
+                    }
+                )
             }
         }
 
     protected abstract fun loadFromDB(): Flow<ResultType>
 
     protected abstract fun shouldFetch(data: ResultType?): Boolean
-
-    protected open fun onFetchFailed() {}
 
     protected abstract suspend fun createCall(): Flow<ApiResponse<RequestType>>
 

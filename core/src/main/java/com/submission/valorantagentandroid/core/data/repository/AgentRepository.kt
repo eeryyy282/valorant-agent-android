@@ -38,7 +38,6 @@ class AgentRepository(
                 val agentList = DataMapperAgent.mapResponseToEntities(data)
                 localDataSource.insertAgent(agentList)
             }
-
         }.asFlow()
 
     override fun getFavoriteAgent(): Flow<List<Agent>> {

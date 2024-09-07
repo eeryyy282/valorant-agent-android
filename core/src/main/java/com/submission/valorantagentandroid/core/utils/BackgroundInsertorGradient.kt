@@ -25,7 +25,6 @@ object BackgroundInsertorGradient {
 
         val gradientDrawable = GradientDrawable(GradientDrawable.Orientation.BL_TR, validColors)
 
-
         val cornerRadius = 24f
         gradientDrawable.cornerRadius = cornerRadius
 

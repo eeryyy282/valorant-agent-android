@@ -14,5 +14,4 @@ class SettingRepository(
     override suspend fun saveThemeSetting(isDarkModeActive: Boolean) {
         return localDataSource.saveThemeSetting(isDarkModeActive)
     }
-
 }

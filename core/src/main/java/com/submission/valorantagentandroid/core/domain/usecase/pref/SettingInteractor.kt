@@ -7,9 +7,6 @@ class SettingInteractor(private val settingRepository: ISettingRepository) : Set
     override fun getThemeSetting(): Flow<Boolean> =
         settingRepository.getThemeSetting()
 
-
     override suspend fun saveThemeSetting(isDarkModeActive: Boolean) =
         settingRepository.saveThemeSetting(isDarkModeActive)
-
-
 }

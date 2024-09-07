@@ -1,6 +1,5 @@
 package com.submission.valorantagentandroid.core.data.source.local.entity
 
-
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey

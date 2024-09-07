@@ -3,6 +3,15 @@ plugins {
     alias(libs.plugins.jetbrains.kotlin.android)
     id("com.google.devtools.ksp")
     id("kotlin-parcelize")
+    id("org.jlleitschuh.gradle.ktlint")
+}
+
+ktlint {
+    verbose.set(true)
+    android.set(true)
+    outputColorName.set("RED")
+    @Suppress("DEPRECATION")
+    disabledRules.set(setOf("indent", "import-ordering"))
 }
 
 android {
@@ -39,6 +48,13 @@ android {
 
     buildTypes {
         release {
+            isMinifyEnabled = true
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
+            )
+        }
+        debug {
             isMinifyEnabled = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
@@ -58,12 +74,9 @@ android {
         buildConfig = true
     }
     dynamicFeatures += setOf(":favorite")
-
-
 }
 
 dependencies {
-
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
@@ -78,7 +91,7 @@ dependencies {
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
 
-    debugImplementation (libs.leakcanary.android)
+    debugImplementation(libs.leakcanary.android)
 
     implementation(libs.retrofit)
     implementation(libs.converter.gson)

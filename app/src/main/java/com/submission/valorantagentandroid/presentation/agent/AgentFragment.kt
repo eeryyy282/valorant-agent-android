@@ -18,7 +18,6 @@ import com.submission.valorantagentandroid.databinding.FragmentAgentBinding
 import com.submission.valorantagentandroid.presentation.detail.DetailAgentActivity
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-
 class AgentFragment : Fragment() {
     private val agentViewModel: AgentViewModel by viewModel()
     private var _binding: FragmentAgentBinding? = null
@@ -26,7 +25,8 @@ class AgentFragment : Fragment() {
     private lateinit var agentAdapter: AgentAdapterComplete
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentAgentBinding.inflate(inflater, container, false)
@@ -45,16 +45,18 @@ class AgentFragment : Fragment() {
             agentViewModel.agentRandom.observe(viewLifecycleOwner) { agentOfTheDay ->
                 val listData = agentOfTheDay.data
                 if (!listData.isNullOrEmpty()) {
+                    val randomNumber = listData.indices.random()
+                    val agent = listData[randomNumber]
+                    val gradientDrawable =
+                        createGradientDrawable(agent.backgroundGradientColors)
                     with(binding) {
-                        val randomNumber = listData.indices.random()
-                        val agent = listData[randomNumber]
                         tvAgentNameOfTheDayAgent.text = agent.displayName
                         tvAgentDeveloperNameAgent.text = agent.developerName
                         tvAgentDescriptionAgent.text = agent.description
 
                         ivAgentOfTheDayAgent.insertGlideImage(
                             ivAgentOfTheDayAgent.context,
-                            agent.fullPortrait,
+                            agent.fullPortrait
                         )
 
                         ivBackgroundAgentOfTheDay.insertGlideImage(
@@ -62,11 +64,9 @@ class AgentFragment : Fragment() {
                             agent.background
                         )
 
-                        val gradientDrawable =
-                            createGradientDrawable(agent.backgroundGradientColors)
                         cvAgentOfTheDayAgent.background = gradientDrawable
-                        setupAction(agent)
                     }
+                    setupAction(agent)
                 }
             }
         }
@@ -115,7 +115,6 @@ class AgentFragment : Fragment() {
                                 ivErrorAgent.visibility = View.GONE
                                 agentAdapter.setData(agent.data)
                             }
-
                         }
                     }
                 }
@@ -137,7 +136,6 @@ class AgentFragment : Fragment() {
             override fun afterTextChanged(s: Editable?) {}
         })
     }
-
 
     override fun onDestroyView() {
         super.onDestroyView()

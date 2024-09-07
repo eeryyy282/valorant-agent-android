@@ -29,7 +29,6 @@ class AgentAdapter : RecyclerView.Adapter<AgentAdapter.ListViewHolder>() {
             LayoutInflater.from(parent.context).inflate(R.layout.item_agent, parent, false)
         )
 
-
     override fun onBindViewHolder(holder: AgentAdapter.ListViewHolder, position: Int) {
         val data = listData[position]
         holder.bind(data)
@@ -62,8 +61,4 @@ class AgentAdapter : RecyclerView.Adapter<AgentAdapter.ListViewHolder>() {
             }
         }
     }
-
-
 }
-
-

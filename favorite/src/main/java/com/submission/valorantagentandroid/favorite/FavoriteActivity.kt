@@ -37,15 +37,15 @@ class FavoriteActivity : AppCompatActivity() {
         loadKoinModules(favoriteModule)
         setupAdapter()
         checkDarkMode()
-
     }
 
     private fun checkDarkMode() {
         settingViewModel.getThemeSetting.observe(this) { darkMode ->
-            delegate.localNightMode = if (darkMode)
+            delegate.localNightMode = if (darkMode) {
                 AppCompatDelegate.MODE_NIGHT_YES
-            else
+            } else {
                 AppCompatDelegate.MODE_NIGHT_NO
+            }
         }
     }
 

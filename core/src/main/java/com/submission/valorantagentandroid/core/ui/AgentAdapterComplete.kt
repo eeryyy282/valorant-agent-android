@@ -11,7 +11,6 @@ import com.submission.valorantagentandroid.core.databinding.ItemAgentCompleteBin
 import com.submission.valorantagentandroid.core.domain.model.Agent
 import com.submission.valorantagentandroid.core.utils.BackgroundInsertorGradient.createGradientDrawable
 
-
 class AgentAdapterComplete : RecyclerView.Adapter<AgentAdapterComplete.ListViewHolder>() {
     private var listData = ArrayList<Agent>()
     var onItemClick: ((Agent) -> Unit)? = null
@@ -29,9 +28,9 @@ class AgentAdapterComplete : RecyclerView.Adapter<AgentAdapterComplete.ListViewH
         viewType: Int
     ): AgentAdapterComplete.ListViewHolder =
         ListViewHolder(
-            LayoutInflater.from(parent.context).inflate(R.layout.item_agent_complete, parent, false)
+            LayoutInflater.from(parent.context)
+                .inflate(R.layout.item_agent_complete, parent, false)
         )
-
 
     override fun onBindViewHolder(holder: AgentAdapterComplete.ListViewHolder, position: Int) {
         val data = listData[position]

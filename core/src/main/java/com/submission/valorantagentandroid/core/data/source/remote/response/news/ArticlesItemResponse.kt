@@ -2,7 +2,6 @@ package com.submission.valorantagentandroid.core.data.source.remote.response.new
 
 import com.google.gson.annotations.SerializedName
 
-
 data class ArticlesItemResponse(
     @field:SerializedName("publishedAt")
     val publishedAt: String? = null,
@@ -20,6 +19,5 @@ data class ArticlesItemResponse(
     val title: String? = null,
 
     @field:SerializedName("url")
-    val url: String,
-
-    )
+    val url: String
+)

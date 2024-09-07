@@ -14,5 +14,4 @@ class DetailAgentViewModel(
 
     fun setFavoriteAgent(agent: Agent, newStatus: Boolean) =
         agentUseCase.setFavoriteAgent(agent, newStatus)
-
 }

@@ -9,7 +9,6 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
 
-
 class AgentRemoteDataSource(private val apiService: AgentApiService) {
     suspend fun getAllAgent(): Flow<ApiResponse<List<AgentResponse>>> {
         return flow {
@@ -27,6 +26,4 @@ class AgentRemoteDataSource(private val apiService: AgentApiService) {
             }
         }.flowOn(Dispatchers.IO)
     }
-
-
 }

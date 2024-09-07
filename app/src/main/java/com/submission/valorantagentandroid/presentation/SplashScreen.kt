@@ -36,11 +36,14 @@ class SplashScreen : AppCompatActivity() {
             insets
         }
         checkDarkMode()
-        Handler(Looper.getMainLooper()).postDelayed({
-            val intent = Intent(this@SplashScreen, MainActivity::class.java)
-            startActivity(intent)
-            finish()
-        }, delaySplashScreen)
+        Handler(Looper.getMainLooper()).postDelayed(
+            {
+                val intent = Intent(this@SplashScreen, MainActivity::class.java)
+                startActivity(intent)
+                finish()
+            },
+            delaySplashScreen
+        )
     }
 
     private fun checkDarkMode() {
@@ -61,7 +64,6 @@ class SplashScreen : AppCompatActivity() {
                     )
                 )
                 delegate.localNightMode = AppCompatDelegate.MODE_NIGHT_NO
-
             }
         }
     }

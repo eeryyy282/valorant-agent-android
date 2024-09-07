@@ -25,4 +25,3 @@ val viewModelModule = module {
     viewModel { AgentViewModel(get()) }
     viewModel { SettingsViewModel(get()) }
 }
-

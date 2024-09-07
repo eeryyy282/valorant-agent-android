@@ -3,6 +3,15 @@ plugins {
     alias(libs.plugins.jetbrains.kotlin.android)
     id("com.google.devtools.ksp")
     id("kotlin-parcelize")
+    id("org.jlleitschuh.gradle.ktlint")
+}
+
+ktlint {
+    verbose.set(true)
+    android.set(true)
+    outputColorName.set("RED")
+    @Suppress("DEPRECATION")
+    disabledRules.set(setOf("indent", "import-ordering"))
 }
 
 android {
@@ -35,6 +44,13 @@ android {
 
     buildTypes {
         release {
+            isMinifyEnabled = false
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
+            )
+        }
+        debug {
             isMinifyEnabled = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
@@ -89,4 +105,7 @@ dependencies {
     implementation(libs.koin.android)
 
     implementation(libs.datastore.preferences)
+
+    implementation(libs.sqlcipher)
+    implementation(libs.sqliteKtx)
 }

@@ -7,7 +7,6 @@ import com.submission.valorantagentandroid.core.data.source.local.room.agent.Age
 import com.submission.valorantagentandroid.core.data.source.local.room.news.NewsDao
 import kotlinx.coroutines.flow.Flow
 
-
 class LocalDataSource(
     private val agentDao: AgentDao,
     private val newsDao: NewsDao,
