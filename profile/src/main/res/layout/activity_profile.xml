@@ -19,7 +19,7 @@
             android:layout_marginTop="24dp"
             android:layout_marginEnd="24dp"
             android:fontFamily="@font/dinnext_medium"
-            android:text="@string/edit_profile_2"
+            android:text="@string/edit_profile"
             android:textSize="20sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"

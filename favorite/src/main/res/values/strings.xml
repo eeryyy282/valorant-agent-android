@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="banner_favorite_agent">Banner favorite agent</string>
+    <string name="favorite_agent_n_your_favorite_agent_your_choice">Favorite agent.\nYour favorite agent, your choice.</string>
+    <string name="you_don_t_have_a_favorite_agent_yet">You don\'t have a favorite agent yet.</string>
+</resources>

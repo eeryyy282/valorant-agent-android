@@ -4,7 +4,6 @@
     <string name="title_notifications">Notifications</string>
     <string name="valorant_agent">Valorant Agent</string>
     <string name="valorant_icon_image">Valorant Icon Image</string>
-    <string name="title_favorite">Favorite</string>
     <string name="title_settings">Settings</string>
     <string name="hi_n_find_your_favorite_agent">Hi!\n\nFind your favorite agent.</string>
     <string name="search_for_agent">Search for agent…</string>
@@ -20,9 +19,6 @@
     <string name="title_agent">Agent</string>
     <string name="image_error_message">Image error message</string>
     <string name="sorry_there_seems_to_be_an_error_try_again_later">Sorry, there seems to be an error. Try again later</string>
-    <string name="banner_favorite_agent">Banner favorite agent</string>
-    <string name="you_don_t_have_a_favorite_agent_yet">You don\'t have a favorite agent yet.</string>
-    <string name="favorite_agent_n_your_favorite_agent_your_choice">Favorite Agent.\n\nYour favorite agent, your choice.</string>
     <string name="remove_favorite">Remove Favorite</string>
     <string name="add_favorite">Add Favorite</string>
     <string name="developer_name">Developer Name</string>
@@ -43,10 +39,8 @@
     <string name="image_agent_detail">image agent detail</string>
     <string name="action_button_agent">Action button agent</string>
     <string name="edit_profile">Edit Profile</string>
-    <string name="edit_profile_2">Edit Profile.</string>
     <string name="username">Username</string>
     <string name="my_bio">My bio</string>
     <string name="image_profile_user">Image profile user</string>
-    <string name="title_profile">favorite</string>
     <string name="guest">Guest</string>
 </resources>
