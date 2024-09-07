@@ -45,9 +45,11 @@ class AgentFragment : Fragment() {
             agentViewModel.agentRandom.observe(viewLifecycleOwner) { agentOfTheDay ->
                 val listData = agentOfTheDay.data
                 if (!listData.isNullOrEmpty()) {
+                    val randomNumber = listData.indices.random()
+                    val agent = listData[randomNumber]
+                    val gradientDrawable =
+                        createGradientDrawable(agent.backgroundGradientColors)
                     with(binding) {
-                        val randomNumber = listData.indices.random()
-                        val agent = listData[randomNumber]
                         tvAgentNameOfTheDayAgent.text = agent.displayName
                         tvAgentDeveloperNameAgent.text = agent.developerName
                         tvAgentDescriptionAgent.text = agent.description
@@ -62,11 +64,9 @@ class AgentFragment : Fragment() {
                             agent.background
                         )
 
-                        val gradientDrawable =
-                            createGradientDrawable(agent.backgroundGradientColors)
                         cvAgentOfTheDayAgent.background = gradientDrawable
-                        setupAction(agent)
                     }
+                    setupAction(agent)
                 }
             }
         }
