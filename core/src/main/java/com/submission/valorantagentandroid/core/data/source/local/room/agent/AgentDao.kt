@@ -19,7 +19,10 @@ interface AgentDao {
     @Query("SELECT * FROM agent WHERE isPlayableCharacter = 1 ORDER BY RANDOM() LIMIT 1")
     fun getRandomAgent(): Flow<List<AgentEntity>>
 
-    @Query("SELECT * FROM agent WHERE isPlayableCharacter = 1 AND displayName LIKE '%' || :query || '%'")
+    @Query(
+        "SELECT * FROM agent WHERE isPlayableCharacter = " +
+                "1 AND displayName LIKE '%' || :query || '%'"
+    )
     fun searchAgent(query: String): Flow<List<AgentEntity>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)

@@ -37,7 +37,8 @@ val databaseModule = module {
     single {
         Room.databaseBuilder(
             androidContext(),
-            AgentDatabase::class.java, "Agent.db"
+            AgentDatabase::class.java,
+            "Agent.db"
         ).fallbackToDestructiveMigration()
             .openHelperFactory(factory)
             .build()
@@ -47,7 +48,8 @@ val databaseModule = module {
     single {
         Room.databaseBuilder(
             androidContext(),
-            NewsDatabase::class.java, "News.db"
+            NewsDatabase::class.java,
+            "News.db"
         ).fallbackToDestructiveMigration()
             .openHelperFactory(factory)
             .build()

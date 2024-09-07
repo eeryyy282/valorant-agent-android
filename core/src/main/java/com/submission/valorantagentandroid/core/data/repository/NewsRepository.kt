@@ -28,7 +28,6 @@ class NewsRepository(
             override suspend fun createCall(): Flow<ApiResponse<List<ArticlesItemResponse>>> =
                 remoteDataSource.getAllNews()
 
-
             override suspend fun saveCallResult(data: List<ArticlesItemResponse>) {
                 val newsList = DataMapperNews.mapResponseToEntities(data)
                 localDataSource.insertNews(newsList)
@@ -37,6 +36,5 @@ class NewsRepository(
             override fun shouldFetch(data: List<News>?): Boolean {
                 return data.isNullOrEmpty()
             }
-
         }.asFlow()
 }

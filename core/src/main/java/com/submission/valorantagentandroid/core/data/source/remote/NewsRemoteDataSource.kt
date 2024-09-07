@@ -17,13 +17,23 @@ class NewsRemoteDataSource(private val apiService: NewsApiService) {
                 val dataArray = response.articles
                 if (dataArray.isNotEmpty()) {
                     val news = dataArray.take(5)
-                    emit(ApiResponse.Success(news))
+                    emit(
+                        ApiResponse.Success(
+                            news
+                        )
+                    )
                 } else {
-                    emit(ApiResponse.Empty)
+                    emit(
+                        ApiResponse.Empty
+                    )
                 }
             } catch (e: Exception) {
-                emit(ApiResponse.Error(e.toString()))
-                Log.e("RemoteDataSourceNews", e.toString())
+                emit(
+                    ApiResponse.Error(e.toString())
+                )
+                Log.e(
+                    "RemoteDataSourceNews", e.toString()
+                )
             }
         }.flowOn(Dispatchers.IO)
     }

@@ -30,7 +30,6 @@ class NewsAdapter : RecyclerView.Adapter<NewsAdapter.ListViewHolder>() {
                 .from(parent.context).inflate(R.layout.item_news, parent, false)
         )
 
-
     override fun onBindViewHolder(holder: NewsAdapter.ListViewHolder, position: Int) {
         val data = listData[position]
         holder.bind(data)
