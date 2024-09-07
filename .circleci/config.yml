@@ -31,12 +31,6 @@ jobs:
       - run:
           name: Check Code Style with Ktlint
           command: ./gradlew ktlintCheck
-      - run:
-          name: Generate Code Coverage Report with Jacoco
-          command: ./gradlew jacocoTestReport
-      - store_artifacts:
-          path: app/build/reports/jacoco/test/html
-          destination: code-coverage
       - store_artifacts:
           path: app/build/reports/ktlint/
           destination: code-style-report
