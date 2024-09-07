@@ -4,6 +4,7 @@ plugins {
     id("com.google.devtools.ksp")
     id("kotlin-parcelize")
     id("org.jlleitschuh.gradle.ktlint")
+    id ("org.owasp.dependencycheck")
 }
 
 ktlint {
@@ -12,6 +13,11 @@ ktlint {
     outputColorName.set("RED")
     @Suppress("DEPRECATION")
     disabledRules.set(setOf("indent", "import-ordering"))
+}
+
+dependencyCheck {
+    failBuildOnCVSS = 7F
+    analyzers.assemblyEnabled = false
 }
 
 android {

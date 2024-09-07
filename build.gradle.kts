@@ -6,4 +6,5 @@ plugins {
     alias(libs.plugins.android.dynamic.feature) apply false
     id("org.jlleitschuh.gradle.ktlint") version "11.5.1"
     id("com.google.devtools.ksp") version "1.9.10-1.0.13" apply false
+    id ("org.owasp.dependencycheck") version "8.3.1"
 }
