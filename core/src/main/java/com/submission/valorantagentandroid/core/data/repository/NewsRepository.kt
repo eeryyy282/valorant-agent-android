@@ -35,7 +35,7 @@ class NewsRepository(
             }
 
             override fun shouldFetch(data: List<News>?): Boolean {
-                return true
+                return data.isNullOrEmpty()
             }
 
         }.asFlow()
