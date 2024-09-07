@@ -41,7 +41,6 @@ class ImageProfileAdapter : RecyclerView.Adapter<ImageProfileAdapter.ListViewHol
             )
         )
 
-
     override fun onBindViewHolder(holder: ImageProfileAdapter.ListViewHolder, position: Int) {
         val data = listData[position]
         holder.bind(data, position == selectedPosition)
