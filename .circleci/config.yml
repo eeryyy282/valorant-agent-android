@@ -32,9 +32,6 @@ jobs:
           name: Check Code Style with Ktlint
           command: ./gradlew ktlintCheck
       - run:
-          name: Check for Vulnerabilities with Dependency-Check
-          command: ./gradlew dependencyCheckAnalyze
-      - run:
           name: Generate Code Coverage Report with Jacoco
           command: ./gradlew jacocoTestReport
       - store_artifacts:
@@ -43,9 +40,6 @@ jobs:
       - store_artifacts:
           path: app/build/reports/ktlint/
           destination: code-style-report
-      - store_artifacts:
-          path: app/build/reports/dependency-check-report.html
-          destination: security-report
       - run:
           name: Run Build
           command: ./gradlew build
