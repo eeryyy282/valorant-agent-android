@@ -72,12 +72,9 @@ android {
         buildConfig = true
     }
     dynamicFeatures += setOf(":favorite")
-
-
 }
 
 dependencies {
-
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
