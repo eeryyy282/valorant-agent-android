@@ -96,4 +96,7 @@ dependencies {
     implementation(libs.koin.android)
 
     implementation(libs.datastore.preferences)
+
+    implementation(libs.sqlcipher)
+    implementation(libs.sqliteKtx)
 }

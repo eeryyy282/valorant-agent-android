@@ -18,6 +18,8 @@ import com.submission.valorantagentandroid.core.domain.repository.IAgentReposito
 import com.submission.valorantagentandroid.core.domain.repository.INewsRepository
 import com.submission.valorantagentandroid.core.domain.repository.ISettingRepository
 import com.submission.valorantagentandroid.core.utils.AppExecutors
+import net.sqlcipher.database.SQLiteDatabase
+import net.sqlcipher.database.SupportFactory
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.android.ext.koin.androidContext
@@ -27,12 +29,17 @@ import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
 val databaseModule = module {
+    val passphrase: ByteArray = SQLiteDatabase.getBytes("submission".toCharArray())
+    val factory = SupportFactory(passphrase)
+
     factory { get<AgentDatabase>().agentDao() }
     single {
         Room.databaseBuilder(
             androidContext(),
             AgentDatabase::class.java, "Agent.db"
-        ).fallbackToDestructiveMigration().build()
+        ).fallbackToDestructiveMigration()
+            .openHelperFactory(factory)
+            .build()
     }
 
     factory { get<NewsDatabase>().newsDao() }
@@ -40,7 +47,9 @@ val databaseModule = module {
         Room.databaseBuilder(
             androidContext(),
             NewsDatabase::class.java, "News.db"
-        ).fallbackToDestructiveMigration().build()
+        ).fallbackToDestructiveMigration()
+            .openHelperFactory(factory)
+            .build()
     }
 }
 

@@ -24,7 +24,8 @@ roomPaging = "2.6.1"
 roomKtx = "2.6.1"
 koin-bom = "3.5.6"
 datastorePreferencesVersion = "1.1.1"
-
+sqlcipher = "4.4.0"
+sqliteKtx = "2.1.0"
 
 [libraries]
 datastore-preferences = { module = "androidx.datastore:datastore-preferences", version.ref = "datastorePreferencesVersion" }
@@ -54,6 +55,8 @@ androidx-paging-runtime-ktx = { module = "androidx.paging:paging-runtime-ktx", v
 androidx-room-paging = { module = "androidx.room:room-paging", version.ref = "roomPaging" }
 androidx-room-ktx = { module = "androidx.room:room-ktx", version.ref = "roomKtx" }
 androidx-room-compiler = { module = "androidx.room:room-compiler", version.ref = "roomKtx" }
+sqlcipher = { module = "net.zetetic:android-database-sqlcipher", version.ref = "sqlcipher" }
+sqliteKtx = { module = "androidx.sqlite:sqlite-ktx", version.ref = "sqliteKtx" }
 
 
 [plugins]
