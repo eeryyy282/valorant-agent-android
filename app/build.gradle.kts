@@ -4,7 +4,7 @@ plugins {
     id("com.google.devtools.ksp")
     id("kotlin-parcelize")
     id("org.jlleitschuh.gradle.ktlint")
-    id ("org.owasp.dependencycheck")
+    id("org.owasp.dependencycheck")
 }
 
 ktlint {
