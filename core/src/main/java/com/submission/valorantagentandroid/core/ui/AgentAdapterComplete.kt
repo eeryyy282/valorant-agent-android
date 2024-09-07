@@ -29,7 +29,8 @@ class AgentAdapterComplete : RecyclerView.Adapter<AgentAdapterComplete.ListViewH
         viewType: Int
     ): AgentAdapterComplete.ListViewHolder =
         ListViewHolder(
-            LayoutInflater.from(parent.context).inflate(R.layout.item_agent_complete, parent, false)
+            LayoutInflater.from(parent.context)
+                .inflate(R.layout.item_agent_complete, parent, false)
         )
 
 

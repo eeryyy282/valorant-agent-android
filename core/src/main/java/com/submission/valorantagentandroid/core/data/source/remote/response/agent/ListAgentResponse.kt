@@ -9,6 +9,3 @@ data class ListAgentResponse(
     @field:SerializedName("status")
     val status: Int
 )
-
-
-

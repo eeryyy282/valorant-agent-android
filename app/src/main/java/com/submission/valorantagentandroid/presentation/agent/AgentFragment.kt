@@ -116,7 +116,6 @@ class AgentFragment : Fragment() {
                                 ivErrorAgent.visibility = View.GONE
                                 agentAdapter.setData(agent.data)
                             }
-
                         }
                     }
                 }

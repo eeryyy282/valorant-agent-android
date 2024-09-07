@@ -6,6 +6,4 @@ import retrofit2.http.GET
 interface AgentApiService {
     @GET("agents")
     suspend fun getListAgent(): ListAgentResponse
-
-
 }

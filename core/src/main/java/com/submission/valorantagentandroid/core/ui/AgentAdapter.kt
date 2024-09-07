@@ -62,8 +62,4 @@ class AgentAdapter : RecyclerView.Adapter<AgentAdapter.ListViewHolder>() {
             }
         }
     }
-
-
 }
-
-

@@ -27,5 +27,4 @@ interface AgentDao {
 
     @Update
     fun updateFavoriteAgent(agent: AgentEntity)
-
 }

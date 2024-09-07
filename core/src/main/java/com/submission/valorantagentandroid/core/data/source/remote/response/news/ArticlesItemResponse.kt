@@ -20,6 +20,5 @@ data class ArticlesItemResponse(
     val title: String? = null,
 
     @field:SerializedName("url")
-    val url: String,
-
-    )
+    val url: String
+)

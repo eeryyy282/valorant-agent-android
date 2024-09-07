@@ -27,6 +27,4 @@ class AgentRemoteDataSource(private val apiService: AgentApiService) {
             }
         }.flowOn(Dispatchers.IO)
     }
-
-
 }

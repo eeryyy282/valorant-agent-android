@@ -42,9 +42,7 @@ class HomeFragment : Fragment() {
         checkDarkMode()
         recyclerViewAgent()
         recyclerViewNews()
-
     }
-
 
     private fun checkDarkMode() {
         val isDarkModeActive =

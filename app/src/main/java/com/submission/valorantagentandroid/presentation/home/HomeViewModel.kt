@@ -8,5 +8,4 @@ import com.submission.valorantagentandroid.core.domain.usecase.news.NewsUseCase
 class HomeViewModel(agentUseCase: AgentUseCase, newsUseCase: NewsUseCase) : ViewModel() {
     val agent = agentUseCase.getAllAgent().asLiveData()
     val news = newsUseCase.getAllNews().asLiveData()
-
 }

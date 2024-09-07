@@ -26,7 +26,8 @@ class NewsAdapter : RecyclerView.Adapter<NewsAdapter.ListViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NewsAdapter.ListViewHolder =
         ListViewHolder(
-            LayoutInflater.from(parent.context).inflate(R.layout.item_news, parent, false)
+            LayoutInflater
+                .from(parent.context).inflate(R.layout.item_news, parent, false)
         )
 
 

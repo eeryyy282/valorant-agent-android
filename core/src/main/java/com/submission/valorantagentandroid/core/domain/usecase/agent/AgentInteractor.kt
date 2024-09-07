@@ -21,6 +21,4 @@ class AgentInteractor(private val agentRepository: IAgentRepository) : AgentUseC
 
     override fun searchAgent(query: String): Flow<List<Agent>> =
         agentRepository.searchAgent(query)
-
-
 }

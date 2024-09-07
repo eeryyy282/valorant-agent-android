@@ -109,7 +109,6 @@ val networkModule = module {
     }
 }
 
-
 val repositoryModule = module {
     single { LocalDataSource(get(), get(), get()) }
     single { AgentRemoteDataSource(get()) }
@@ -120,5 +119,4 @@ val repositoryModule = module {
     single<IAgentRepository> { AgentRepository(get(), get(), get()) }
     single<INewsRepository> { NewsRepository(get(), get()) }
     single<ISettingRepository> { SettingRepository(get()) }
-
 }
