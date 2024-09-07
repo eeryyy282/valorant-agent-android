@@ -92,7 +92,6 @@ class ProfileActivity : AppCompatActivity() {
                                 ivErrorEditPhotoProfile.visibility = this
                                 tvErrorMessageProfile.visibility = this
                             }
-
                         }
 
                         is Resource.Loading -> {
