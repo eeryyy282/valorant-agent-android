@@ -126,8 +126,7 @@ class HomeFragment : Fragment() {
                 }
 
                 with(binding.rvTopAgentHome) {
-                    layoutManager =
-                        LinearLayoutManager(
+                    layoutManager = LinearLayoutManager(
                             context,
                             LinearLayoutManager.HORIZONTAL,
                             false

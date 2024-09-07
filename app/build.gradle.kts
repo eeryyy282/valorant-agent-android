@@ -10,6 +10,8 @@ ktlint {
     verbose.set(true)
     android.set(true)
     outputColorName.set("RED")
+    @Suppress("DEPRECATION")
+    disabledRules.set(setOf("indent"))
 }
 
 android {
