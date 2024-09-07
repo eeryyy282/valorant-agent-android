@@ -125,13 +125,13 @@ class DetailAgentActivity : AppCompatActivity() {
         if (statusFavorite == true) {
             binding.buttonFavoriteDetail.let {
                 it.text = getString(R.string.remove_favorite)
-                it.setBackgroundColor(R.color.orange)
+                it.setBackgroundColor(getColor(R.color.orange))
                 it.setCompoundDrawablesWithIntrinsicBounds(R.drawable.remove_icon, 0, 0, 0)
             }
         } else {
             binding.buttonFavoriteDetail.let {
                 it.text = getString(R.string.add_favorite)
-                it.setBackgroundColor(R.color.green)
+                it.setBackgroundColor(getColor(R.color.green))
                 it.setCompoundDrawablesWithIntrinsicBounds(R.drawable.add_icon, 0, 0, 0)
             }
         }

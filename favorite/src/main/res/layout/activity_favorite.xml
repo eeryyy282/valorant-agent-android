@@ -21,7 +21,7 @@
             android:layout_marginEnd="24dp"
             android:fontFamily="@font/dinnext_medium"
             android:includeFontPadding="false"
-            android:text="@string/favorite_agent_n_nyour_favorite_agent_your_choice"
+            android:text="@string/favorite_agent_n_your_favorite_agent_your_choice"
             android:textAlignment="textStart"
             android:textAllCaps="false"
             android:textSize="20sp"
