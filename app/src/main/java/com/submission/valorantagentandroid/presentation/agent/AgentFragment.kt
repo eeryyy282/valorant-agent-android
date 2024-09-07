@@ -26,7 +26,8 @@ class AgentFragment : Fragment() {
     private lateinit var agentAdapter: AgentAdapterComplete
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentAgentBinding.inflate(inflater, container, false)
@@ -56,7 +57,7 @@ class AgentFragment : Fragment() {
 
                         ivAgentOfTheDayAgent.insertGlideImage(
                             ivAgentOfTheDayAgent.context,
-                            agent.fullPortrait,
+                            agent.fullPortrait
                         )
 
                         ivBackgroundAgentOfTheDay.insertGlideImage(

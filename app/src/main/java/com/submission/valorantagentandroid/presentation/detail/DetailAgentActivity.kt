@@ -41,10 +41,11 @@ class DetailAgentActivity : AppCompatActivity() {
 
     private fun checkDarkMode() {
         detailAgentViewModel.getThemeSetting.observe(this) { darkMode ->
-            delegate.localNightMode = if (darkMode)
+            delegate.localNightMode = if (darkMode) {
                 AppCompatDelegate.MODE_NIGHT_YES
-            else
+            } else {
                 AppCompatDelegate.MODE_NIGHT_NO
+            }
         }
     }
 

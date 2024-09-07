@@ -48,7 +48,8 @@ class HomeFragment : Fragment() {
 
     private fun checkDarkMode() {
         val isDarkModeActive =
-            (resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK == Configuration.UI_MODE_NIGHT_YES)
+            (resources.configuration.uiMode and
+                    Configuration.UI_MODE_NIGHT_MASK == Configuration.UI_MODE_NIGHT_YES)
         with(binding) {
             if (isDarkModeActive) {
                 ivLogoHome.setColorFilter(
