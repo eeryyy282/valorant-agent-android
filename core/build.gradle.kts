@@ -83,7 +83,7 @@ dependencies {
     implementation(libs.androidx.navigation.ui.ktx)
     implementation(libs.androidx.activity)
     androidTestImplementation(libs.androidx.espresso.core)
-    testImplementation (libs.junit)
+    testImplementation(libs.junit)
 
     implementation(libs.retrofit)
     implementation(libs.converter.gson)
