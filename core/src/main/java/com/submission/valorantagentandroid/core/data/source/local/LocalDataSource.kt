@@ -36,4 +36,16 @@ class LocalDataSource(
 
     suspend fun saveThemeSetting(isDarkModeActive: Boolean) =
         settingPreference.saveThemeSetting(isDarkModeActive)
+
+    fun getUsername(): Flow<String> = settingPreference.getUsername()
+
+    suspend fun saveUsername(username: String) = settingPreference.saveUsername(username)
+
+    fun getUserBio(): Flow<String> = settingPreference.getUserBio()
+
+    suspend fun saveUserBio(userBio: String) = settingPreference.saveUserBio(userBio)
+
+    fun getUserImage(): Flow<String> = settingPreference.getUserImage()
+
+    suspend fun saveUserImage(userImage: String) = settingPreference.saveUserImage(userImage)
 }

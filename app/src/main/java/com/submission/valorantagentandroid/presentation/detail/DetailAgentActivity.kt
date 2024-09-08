@@ -58,27 +58,27 @@ class DetailAgentActivity : AppCompatActivity() {
     private fun showDetailAgent(detailAgent: Agent?) {
         detailAgent?.let {
             val gradientDrawable = createGradientDrawable(detailAgent.backgroundGradientColors)
-            with(binding) {
-                tvAgentNameDetail.text = detailAgent.displayName
-                tvAgentDescriptionDetail.text = detailAgent.description
-                tvAgentDeveloperNameDetail.text = detailAgent.developerName
+            binding.let {
+                it.tvAgentNameDetail.text = detailAgent.displayName
+                it.tvAgentDescriptionDetail.text = detailAgent.description
+                it.tvAgentDeveloperNameDetail.text = detailAgent.developerName
 
-                ivBackgroundAgentDetail.insertGlideImage(
-                    ivBackgroundAgentDetail.context,
+                it.ivBackgroundAgentDetail.insertGlideImage(
+                    it.ivBackgroundAgentDetail.context,
                     detailAgent.background
                 )
 
-                ivAgentDetail.insertGlideImage(
-                    ivAgentDetail.context,
+                it.ivAgentDetail.insertGlideImage(
+                    it.ivAgentDetail.context,
                     detailAgent.fullPortrait
                 )
 
-                ivDisplayIconAgent.insertGlideImage(
-                    ivDisplayIconAgent.context,
+                it.ivDisplayIconAgent.insertGlideImage(
+                    it.ivDisplayIconAgent.context,
                     detailAgent.displayIcon
                 )
 
-                binding.cvAgentDetailPotrait.background = gradientDrawable
+                it.cvAgentDetailPotrait.background = gradientDrawable
             }
             setupFavoriteAction(detailAgent)
             setupAction(detailAgent)

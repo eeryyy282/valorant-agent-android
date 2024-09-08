@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="photo_profile">Photo Profile</string>
+    <string name="cancel">Cancel</string>
+    <string name="save">Save</string>
+    <string name="confirm">Confirm</string>
+    <string name="are_you_sure_you_want_to_save_your_changes">Are you sure you want to save your changes?</string>
+    <string name="please_choose_your_photo_profile">Please choose your photo profile</string>
+    <string name="my_bio">My bio</string>
+    <string name="guest">Guest</string>
+    <string name="edit_profile">Edit Profile.</string>
+    <string name="title_profile">Profile</string>
+</resources>

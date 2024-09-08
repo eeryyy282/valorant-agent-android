@@ -4,7 +4,6 @@
     <string name="title_notifications">Notifications</string>
     <string name="valorant_agent">Valorant Agent</string>
     <string name="valorant_icon_image">Valorant Icon Image</string>
-    <string name="title_favorite">Favorite</string>
     <string name="title_settings">Settings</string>
     <string name="search_for_agent">Search for agent…</string>
     <string name="find_your_favorite_agent_and_show_the_world_what_you_re_made_of">Find your favorite agent and show the world what you\'re made of!</string>
@@ -17,8 +16,6 @@
     <string name="agent_name">Agent Name</string>
     <string name="title_agent">Agent</string>
     <string name="sorry_there_seems_to_be_an_error_try_again_later">Sorry, there seems to be an error. Try again later</string>
-    <string name="banner_favorite_agent">Banner favorite agent</string>
-    <string name="you_don_t_have_a_favorite_agent_yet">You don\'t have a favorite agent yet.</string>
     <string name="remove_favorite">Remove Favorite</string>
     <string name="add_favorite">Add Favorite</string>
     <string name="news_title">News Title</string>

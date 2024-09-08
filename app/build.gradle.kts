@@ -73,7 +73,7 @@ android {
         viewBinding = true
         buildConfig = true
     }
-    dynamicFeatures += setOf(":favorite")
+    dynamicFeatures += setOf(":favorite", ":profile")
 }
 
 dependencies {
@@ -88,7 +88,6 @@ dependencies {
     implementation(libs.androidx.activity)
     implementation(project(":core"))
     testImplementation(libs.junit)
-    androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
 
     debugImplementation(libs.leakcanary.android)

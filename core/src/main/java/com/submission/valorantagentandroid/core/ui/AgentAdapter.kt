@@ -26,7 +26,11 @@ class AgentAdapter : RecyclerView.Adapter<AgentAdapter.ListViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AgentAdapter.ListViewHolder =
         ListViewHolder(
-            LayoutInflater.from(parent.context).inflate(R.layout.item_agent, parent, false)
+            LayoutInflater.from(parent.context).inflate(
+                R.layout.item_agent,
+                parent,
+                false
+            )
         )
 
     override fun onBindViewHolder(holder: AgentAdapter.ListViewHolder, position: Int) {
