@@ -87,7 +87,7 @@ dependencies {
     implementation(libs.androidx.navigation.ui.ktx)
     implementation(libs.androidx.activity)
     implementation(project(":core"))
-    testImplementation (libs.junit)
+    testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.espresso.core)
 
     debugImplementation(libs.leakcanary.android)
