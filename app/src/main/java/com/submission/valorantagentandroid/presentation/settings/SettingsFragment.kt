@@ -3,6 +3,7 @@ package com.submission.valorantagentandroid.presentation.settings
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -62,14 +63,18 @@ class SettingsFragment : Fragment() {
                 }
             }
             getUserImage.observe(viewLifecycleOwner) { imageProfile ->
-                if (imageProfile == "") {
+                if (imageProfile.isEmpty()) {
                     settingsViewModel.agent.observe(viewLifecycleOwner) { randomAgent ->
-                        val agentDisplayPortrait = randomAgent[0].displayIcon
-                        binding.ivProfileUser.insertGlideImage(
-                            requireContext(),
-                            agentDisplayPortrait
-                        )
-                        agentDisplayPortrait?.let { settingsViewModel.saveUserImage(it) }
+                        if (randomAgent.isNotEmpty()) {
+                            val agentDisplayPortrait = randomAgent[0].displayIcon
+                            binding.ivProfileUser.insertGlideImage(
+                                requireContext(),
+                                agentDisplayPortrait
+                            )
+                            agentDisplayPortrait?.let { settingsViewModel.saveUserImage(it) }
+                        } else {
+                            Log.w("SettingsFragment", getString(R.string.randomagent_list_is_empty))
+                        }
                     }
                 } else {
                     binding.ivProfileUser.insertGlideImage(

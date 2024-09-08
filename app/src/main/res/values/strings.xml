@@ -43,4 +43,5 @@
     <string name="my_bio">My bio</string>
     <string name="image_profile_user">Image profile user</string>
     <string name="guest">Guest</string>
+    <string name="randomagent_list_is_empty">randomAgent list is empty</string>
 </resources>
