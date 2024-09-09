@@ -67,6 +67,21 @@ class AgentFragment : Fragment() {
                         cvAgentOfTheDayAgent.background = gradientDrawable
                     }
                     setupAction(agent)
+                } else {
+                    with(binding) {
+                        View.GONE.let {
+                            tvAgentNameOfTheDayAgent.visibility
+                            tvAgentDeveloperNameAgent.visibility
+                            tvAgentDescriptionAgent.visibility
+                            ivAgentOfTheDayAgent.visibility
+                            ivBackgroundAgentOfTheDay.visibility
+                            cvAgentOfTheDayAgent.visibility
+                        }
+                        View.VISIBLE.let {
+                            tvErrorAgentOfTheDay.visibility
+                            ivErrorAgentOfTheDay.visibility
+                        }
+                    }
                 }
             }
         }

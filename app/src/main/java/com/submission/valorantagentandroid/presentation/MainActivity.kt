@@ -50,4 +50,11 @@ class MainActivity : AppCompatActivity() {
             startActivity(Intent(Intent.ACTION_VIEW, uri))
         }
     }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        @Suppress("DEPRECATION")
+        binding.navView.setOnNavigationItemSelectedListener(null)
+        binding.fabFavorite.setOnClickListener(null)
+    }
 }
